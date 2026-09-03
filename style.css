@@ -1,0 +1,43 @@
+:root {
+  /* Main brand */
+  --primary: hsl(245, 75%, 60%);
+  --primary-dark: hsl(245, 70%, 48%);
+  --primary-light: hsl(245, 75%, 95%);
+
+  /* Backgrounds */
+  --background: hsl(0, 0%, 100%);
+  --surface: hsl(220, 20%, 98%);
+  --card: hsl(0, 0%, 100%);
+
+  /* Text */
+  --text: hsl(222, 35%, 15%);
+  --text-secondary: hsl(220, 15%, 45%);
+  --text-muted: hsl(220, 10%, 60%);
+
+  /* Borders */
+  --border: hsl(220, 15%, 90%);
+
+  /* Glass */
+  --glass: hsla(0, 0%, 100%, 0.75);
+}
+.all {
+  background-color: var(--background);
+}
+.floating-nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 90%;
+  max-width: 1100px;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 50px;
+
+  z-index: 1000;
+}
