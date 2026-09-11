@@ -3,57 +3,780 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DevMemory</title>
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="icon" type="img/png" sizes="32x32" href="/DevMemoryIcon.png" />
+    <title>DevMemory — Remember how you solved it.</title>
+    <meta
+      name="description"
+      content="DevMemory helps developers save and find the bugs, code snippets, commands, and lessons they learn while building."
+    />
+    <link rel="icon" type="image/png" href="DevMemoryIcon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#f3f8ff",
+                100: "#eaf3ff",
+                200: "#dbeafe",
+                500: "#2563eb",
+                600: "#1d4ed8",
+                700: "#1e40af",
+              },
+              ink: "#0f172a",
+              muted: "#475569",
+              line: "#dfeaf6",
+              panel: "#f8fafc",
+              soft: "#f1f5f9",
+            },
+            boxShadow: {
+              soft: "0 10px 30px rgba(15, 23, 42, 0.06)",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      :root {
+        --primary: hsl(214, 85%, 52%);
+        --primary-dark: hsl(213, 80%, 40%);
+        --primary-light: hsl(210, 90%, 96%);
+        --background: hsl(210, 20%, 99%);
+        --surface: hsl(210, 20%, 97%);
+        --text: hsl(215, 35%, 15%);
+        --text-secondary: hsl(215, 15%, 45%);
+        --text-muted: hsl(215, 10%, 60%);
+        --border: hsl(210, 20%, 90%);
+        --footer: hsl(215, 35%, 12%);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--background);
+        color: var(--text);
+      }
+
+      .app-shell {
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(37, 99, 235, 0.07),
+            transparent 42%
+          ),
+          var(--background);
+      }
+
+      .soft-card {
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(10px);
+      }
+
+      .glass-menu {
+        background: rgba(15, 23, 42, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 28px 80px rgba(15, 23, 42, 0.24);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+
+      .terminal-window {
+        background: rgba(18, 24, 35, 0.96);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      }
+
+      .terminal-prompt {
+        color: #f5d36c;
+      }
+
+      .terminal-output-line {
+        min-height: 1.3em;
+        white-space: pre-wrap;
+      }
+
+      .terminal-cursor {
+        display: inline-block;
+        width: 0.6em;
+        height: 1em;
+        margin-left: 2px;
+        vertical-align: -0.08em;
+        background: #f5d36c;
+        animation: blink 0.9s steps(1, end) infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .blue-pill {
+        background: rgba(37, 99, 235, 0.06);
+        border: 1px solid rgba(37, 99, 235, 0.12);
+        color: var(--primary-dark);
+      }
+
+      .small-icon {
+        width: 2.4rem;
+        height: 2.4rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.8rem;
+        background: rgba(37, 99, 235, 0.06);
+        border: 1px solid rgba(37, 99, 235, 0.08);
+        color: var(--primary);
+      }
+
+      .feature-card,
+      .step-card,
+      .community-card,
+      .preview-card {
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          box-shadow 180ms ease;
+      }
+
+      .feature-card:hover,
+      .step-card:hover,
+      .community-card:hover,
+      .preview-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(37, 99, 235, 0.18);
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
+      }
+    </style>
   </head>
-  <body class="all">
-    <header>
-      <nav class="navbar navbar-expand-lg floating-nav">
-        <div class="container">
-          <a class="navbar-brand fw-bold" href="#"> DevMemory </a>
-
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
+  <body class="antialiased selection:bg-blue-100 selection:text-blue-900">
+    <div class="app-shell">
+      <header class="fixed inset-x-0 top-4 z-50 px-4">
+        <div class="mx-auto max-w-6xl">
+          <nav
+            class="soft-card flex items-center justify-between rounded-full px-4 py-3 shadow-soft md:px-6"
           >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+            <div class="flex items-center gap-3">
+              <img src="DevMemoryLogo.png" alt="DevMemory" class="h-8 w-auto" />
+            </div>
 
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Memories</a>
-              </li>
+            <div
+              class="hidden items-center gap-8 text-sm font-medium text-slate-600 lg:flex"
+            >
+              <a class="transition hover:text-blue-600" href="#memories"
+                >Memories</a
+              >
+              <a class="transition hover:text-blue-600" href="#community"
+                >Community</a
+              >
+              <a class="transition hover:text-blue-600" href="#resources"
+                >Resources</a
+              >
+              <a class="transition hover:text-blue-600" href="#about">About</a>
+              <a class="transition hover:text-blue-600" href="#developers"
+                >For Developers</a
+              >
+            </div>
 
-              <li class="nav-item">
-                <a class="nav-link" href="#">Community</a>
-              </li>
+            <div class="hidden items-center gap-3 lg:flex">
+              <a
+                href="#"
+                class="hidden text-sm font-medium text-slate-700 transition hover:text-blue-600 sm:inline-flex"
+                >Sign In</a
+              >
+              <a
+                href="#"
+                class="inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
+              >
+                Sign Up
+              </a>
+            </div>
 
-              <li class="nav-item">
-                <a class="nav-link" href="#">Resources</a>
-              </li>
+            <button
+              id="mobile-menu-button"
+              type="button"
+              aria-label="Open menu"
+              aria-expanded="false"
+              class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-slate-700 shadow-sm transition hover:border-blue-200 hover:text-blue-700 lg:hidden"
+            >
+              <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+          </nav>
 
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-            </ul>
-
-            <div>
-              <a href="#" class="btn btn-dark rounded-pill px-4"> Sign Up </a>
+          <div
+            id="mobile-menu"
+            class="glass-menu mt-3 hidden overflow-hidden rounded-2xl lg:hidden"
+          >
+            <div class="flex flex-col p-3">
+              <a
+                class="rounded-xl px-3 py-2 text-sm font-medium text-white/90 transition hover:bg-white/8 hover:text-white"
+                href="#memories"
+                >Memories</a
+              >
+              <a
+                class="rounded-xl px-3 py-2 text-sm font-medium text-white/90 transition hover:bg-white/8 hover:text-white"
+                href="#community"
+                >Community</a
+              >
+              <a
+                class="rounded-xl px-3 py-2 text-sm font-medium text-white/90 transition hover:bg-white/8 hover:text-white"
+                href="#resources"
+                >Resources</a
+              >
+              <a
+                class="rounded-xl px-3 py-2 text-sm font-medium text-white/90 transition hover:bg-white/8 hover:text-white"
+                href="#about"
+                >About</a
+              >
+              <a
+                class="rounded-xl px-3 py-2 text-sm font-medium text-white/90 transition hover:bg-white/8 hover:text-white"
+                href="#developers"
+                >For Developers</a
+              >
+              <a
+                href="#"
+                class="mt-2 inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500"
+              >
+                Start Remembering
+              </a>
             </div>
           </div>
         </div>
-      </nav>
-    </header>
-    <section></section>
+      </header>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+      <main>
+        <section class="pt-28 pb-20 md:pt-36 md:pb-28">
+          <div class="mx-auto max-w-6xl px-4 md:px-6">
+            <div class="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
+              <div>
+                <div
+                  class="blue-pill inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium"
+                >
+                  <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+                  Save what you learned while building
+                </div>
+
+                <h1
+                  class="mt-6 max-w-xl text-4xl font-black tracking-[-0.06em] text-slate-900 md:text-6xl"
+                >
+                  Remember how you solved it.
+                </h1>
+
+                <p
+                  class="mt-5 max-w-xl text-lg leading-8 text-slate-600 md:text-xl"
+                >
+                  Save the bugs you solved, the code you learned, and the
+                  knowledge you don’t want to forget. Find it again whenever you
+                  need it.
+                </p>
+
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href="#"
+                    class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-blue-700"
+                  >
+                    Start Remembering
+                  </a>
+                  <a
+                    href="#community"
+                    class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3.5 text-base font-semibold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
+                  >
+                    Explore Community
+                  </a>
+                </div>
+
+                <div
+                  class="mt-9 flex flex-wrap items-center gap-6 text-sm text-slate-500"
+                >
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-blue-600"></i>
+                    Save bugs, snippets and commands
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass text-blue-600"></i>
+                    Search everything instantly
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="preview-card relative rounded-[2rem] border border-slate-200 bg-white p-4 shadow-soft md:p-5"
+              >
+                <div
+                  class="terminal-window rounded-[1.5rem] p-3 text-left text-[11px] text-slate-200"
+                >
+                  <div
+                    class="mb-3 flex items-center gap-2 border-b border-slate-700 pb-2"
+                  >
+                    <span class="h-2.5 w-2.5 rounded-full bg-[#f87171]"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-[#fbbf24]"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-[#4ade80]"></span>
+                    <span
+                      class="ml-auto text-[10px] tracking-[0.16em] text-slate-400 uppercase"
+                      >zsh — devmemory</span
+                    >
+                  </div>
+
+                  <div id="terminal-lines" class="space-y-2 font-mono">
+                    <div class="terminal-line">
+                      <span class="terminal-prompt">$</span> devmemory save
+                    </div>
+                    <div class="terminal-line">
+                      <span class="text-slate-300">error</span>
+                      <span class="text-rose-300"
+                        >Cannot read properties of undefined (reading
+                        'map')</span
+                      >
+                    </div>
+                    <div class="terminal-line">
+                      <span class="terminal-prompt">fix</span>
+                      <span class="text-amber-300"
+                        >guard the response before mapping —
+                        data?.items?.map(...)</span
+                      >
+                    </div>
+                    <div class="terminal-line">
+                      <span class="terminal-prompt">saved</span>
+                      <span class="text-emerald-300"
+                        >— tagged javascript, api</span
+                      >
+                    </div>
+                    <div class="terminal-line">
+                      <span class="terminal-prompt">$</span> devmemory find
+                      "cannot read properties of undefined"
+                    </div>
+                    <div class="terminal-line">
+                      <span class="text-slate-300">1 match</span>
+                      <span class="text-slate-400">— saved 3 months ago</span>
+                    </div>
+                    <div class="terminal-line">
+                      <span class="terminal-prompt">fix</span>
+                      <span class="text-amber-300"
+                        >guard the response before mapping —
+                        data?.items?.map(...)</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="mt-4 rounded-[1.5rem] border border-slate-200 bg-slate-50 p-4"
+                >
+                  <div
+                    class="flex items-center justify-between border-b border-slate-200 pb-3"
+                  >
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="h-2.5 w-2.5 rounded-full bg-slate-300"
+                      ></span>
+                      <span
+                        class="h-2.5 w-2.5 rounded-full bg-slate-300"
+                      ></span>
+                      <span
+                        class="h-2.5 w-2.5 rounded-full bg-slate-300"
+                      ></span>
+                    </div>
+                    <span
+                      class="text-[11px] font-medium tracking-[0.18em] text-slate-400 uppercase"
+                      >DevMemory</span
+                    >
+                  </div>
+
+                  <div class="mt-4 space-y-3">
+                    <div
+                      class="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-3"
+                    >
+                      <div class="flex items-center gap-3">
+                        <div class="small-icon">
+                          <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </div>
+                        <div>
+                          <p
+                            class="text-[11px] font-medium text-slate-400 uppercase tracking-[0.12em]"
+                          >
+                            Memory
+                          </p>
+                          <p class="text-sm font-semibold text-slate-800">
+                            Git CRLF Error
+                          </p>
+                        </div>
+                      </div>
+                      <span
+                        class="rounded-full bg-blue-50 px-2 py-1 text-[10px] font-semibold text-blue-700"
+                        >git</span
+                      >
+                    </div>
+
+                    <div
+                      class="rounded-xl border border-slate-200 bg-white p-3"
+                    >
+                      <div
+                        class="flex items-center justify-between text-[10px] font-medium uppercase tracking-[0.12em] text-slate-400"
+                      >
+                        <span>Solution</span>
+                        <span>2 min ago</span>
+                      </div>
+                      <p class="mt-2 text-sm leading-6 text-slate-700">
+                        Set core.autocrlf to input and re-checkout files to keep
+                        line endings consistent across Windows and Linux.
+                      </p>
+                    </div>
+
+                    <div class="grid gap-3 sm:grid-cols-2">
+                      <div
+                        class="rounded-xl border border-slate-200 bg-white p-3"
+                      >
+                        <p
+                          class="text-[10px] font-medium uppercase tracking-[0.12em] text-slate-400"
+                        >
+                          Code Snippet
+                        </p>
+                        <pre
+                          class="mt-2 overflow-hidden text-[11px] leading-5 text-slate-700"
+                        ><code>git config --global core.autocrlf input</code></pre>
+                      </div>
+                      <div
+                        class="rounded-xl border border-slate-200 bg-white p-3"
+                      >
+                        <p
+                          class="text-[10px] font-medium uppercase tracking-[0.12em] text-slate-400"
+                        >
+                          Tags
+                        </p>
+                        <div
+                          class="mt-2 flex flex-wrap gap-2 text-[10px] text-slate-600"
+                        >
+                          <span class="rounded-full bg-slate-100 px-2 py-1"
+                            >git</span
+                          >
+                          <span class="rounded-full bg-slate-100 px-2 py-1"
+                            >windows</span
+                          >
+                          <span class="rounded-full bg-slate-100 px-2 py-1"
+                            >shell</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="memories"
+          class="border-t border-slate-200 bg-white/80 py-24"
+        >
+          <div class="mx-auto max-w-6xl px-4 md:px-6">
+            <div class="mx-auto max-w-2xl text-center">
+              <p
+                class="text-xs font-semibold uppercase tracking-[0.22em] text-blue-600"
+              >
+                What developers save
+              </p>
+              <h2
+                class="mt-4 text-3xl font-bold tracking-[-0.05em] text-slate-900 md:text-4xl"
+              >
+                Keep the knowledge you don’t want to lose.
+              </h2>
+            </div>
+
+            <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              <article
+                class="feature-card rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <div class="small-icon mb-5">
+                  <i class="fa-solid fa-bug text-sm"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-900">
+                  Bug Solutions
+                </h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                  Save the problems you solved and the fixes you used when the
+                  bug finally made sense.
+                </p>
+              </article>
+
+              <article
+                class="feature-card rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <div class="small-icon mb-5">
+                  <i class="fa-solid fa-code text-sm"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-900">
+                  Code Snippets
+                </h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                  Keep the reusable patterns, helper functions, and snippets you
+                  reach for again and again.
+                </p>
+              </article>
+
+              <article
+                class="feature-card rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <div class="small-icon mb-5">
+                  <i class="fa-solid fa-terminal text-sm"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-900">Commands</h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                  Save Git, npm, Docker, and terminal commands you forget until
+                  you need them most.
+                </p>
+              </article>
+
+              <article
+                class="feature-card rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <div class="small-icon mb-5">
+                  <i class="fa-solid fa-book-open text-sm"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-900">
+                  Developer Knowledge
+                </h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                  Capture concepts, lessons, resources, and notes that help you
+                  learn and keep moving.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="resources" class="py-24">
+          <div class="mx-auto max-w-6xl px-4 md:px-6">
+            <div class="mx-auto max-w-xl text-center">
+              <p
+                class="text-xs font-semibold uppercase tracking-[0.22em] text-blue-600"
+              >
+                How it works
+              </p>
+              <h2
+                class="mt-4 text-3xl font-bold tracking-[-0.05em] text-slate-900 md:text-4xl"
+              >
+                A simple routine for the knowledge you use most.
+              </h2>
+            </div>
+
+            <div class="mt-12 grid gap-6 md:grid-cols-3">
+              <article
+                class="step-card rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+              >
+                <div class="mb-5 flex items-center justify-between">
+                  <span
+                    class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white"
+                    >1</span
+                  >
+                  <i class="fa-solid fa-lightbulb text-xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-900">Solve</h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                  Solve a problem while building your project, debugging an
+                  issue, or learning something new.
+                </p>
+              </article>
+
+              <article
+                class="step-card rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+              >
+                <div class="mb-5 flex items-center justify-between">
+                  <span
+                    class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white"
+                    >2</span
+                  >
+                  <i class="fa-solid fa-floppy-disk text-xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-900">Save</h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                  Save the fix, snippet, command, or lesson in DevMemory with
+                  the context you need later.
+                </p>
+              </article>
+
+              <article
+                class="step-card rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+              >
+                <div class="mb-5 flex items-center justify-between">
+                  <span
+                    class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white"
+                    >3</span
+                  >
+                  <i
+                    class="fa-solid fa-clock-rotate-left text-xl text-blue-600"
+                  ></i>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-900">Remember</h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                  Find exactly what you need again when you’re deep in the next
+                  problem or sprint.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="community"
+          class="border-y border-slate-200 bg-slate-50/80 py-24"
+        >
+          <div class="mx-auto max-w-6xl px-4 md:px-6">
+            <div class="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+              <div>
+                <p
+                  class="text-xs font-semibold uppercase tracking-[0.22em] text-blue-600"
+                >
+                  The future
+                </p>
+                <h2
+                  class="mt-4 text-3xl font-bold tracking-[-0.05em] text-slate-900 md:text-4xl"
+                >
+                  Don’t just remember your solutions. Share them.
+                </h2>
+                <p class="mt-5 max-w-xl text-lg leading-8 text-slate-600">
+                  In time, developers will be able to share the fixes they
+                  discovered and discover how other developers solved similar
+                  problems.
+                </p>
+              </div>
+
+              <div
+                class="community-card rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm"
+              >
+                <div
+                  class="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <p
+                        class="text-[10px] uppercase tracking-[0.18em] text-slate-400"
+                      >
+                        Trending solutions
+                      </p>
+                      <p class="mt-2 text-lg font-semibold text-slate-900">
+                        Supabase RLS Fix
+                      </p>
+                    </div>
+                    <span
+                      class="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-semibold text-blue-700"
+                      >shared</span
+                    >
+                  </div>
+
+                  <div class="mt-4 space-y-3">
+                    <div
+                      class="rounded-xl border border-slate-200 bg-white p-3"
+                    >
+                      <div
+                        class="flex items-center justify-between text-[10px] uppercase tracking-[0.12em] text-slate-400"
+                      >
+                        <span>Context</span>
+                        <span>12 likes</span>
+                      </div>
+                      <p class="mt-2 text-sm text-slate-700">
+                        Policy allowed SELECT for authenticated but denied via
+                        row-level mismatch.
+                      </p>
+                    </div>
+                    <div
+                      class="rounded-xl border border-slate-200 bg-white p-3"
+                    >
+                      <div
+                        class="flex items-center justify-between text-[10px] uppercase tracking-[0.12em] text-slate-400"
+                      >
+                        <span>Fix</span>
+                        <span>2 min read</span>
+                      </div>
+                      <p class="mt-2 text-sm text-slate-700">
+                        Add the correct policy to both SELECT and WITH CHECK and
+                        align on schema roles.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="py-24">
+          <div class="mx-auto max-w-5xl px-4 md:px-6">
+            <div
+              class="rounded-[2rem] border border-slate-200 bg-white p-8 text-center shadow-soft md:p-12"
+            >
+              <p
+                class="text-xs font-semibold uppercase tracking-[0.22em] text-blue-600"
+              >
+                Keep learning
+              </p>
+              <h2
+                class="mt-4 text-3xl font-bold tracking-[-0.05em] text-slate-900 md:text-5xl"
+              >
+                Stop solving the same problem twice.
+              </h2>
+              <p
+                class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600"
+              >
+                Keep your development knowledge close and make every solution
+                part of your future.
+              </p>
+              <a
+                href="#"
+                class="mt-8 inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-blue-700"
+              >
+                Start Remembering
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer
+        class="border-t border-slate-200 bg-slate-900 py-10 text-slate-300"
+      >
+        <div
+          class="mx-auto flex max-w-6xl flex-col gap-8 px-4 md:flex-row md:items-center md:justify-between md:px-6"
+        >
+          <div>
+            <div class="flex items-center gap-3">
+              <img src="DevMemoryLogo.png" alt="DevMemory" class="h-8 w-auto" />
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-5 text-sm text-slate-300">
+            <a class="transition hover:text-white" href="#memories">Memories</a>
+            <a class="transition hover:text-white" href="#community"
+              >Community</a
+            >
+            <a class="transition hover:text-white" href="#resources"
+              >Resources</a
+            >
+            <a class="transition hover:text-white" href="#about">About</a>
+            <a class="transition hover:text-white" href="#">GitHub</a>
+            <a class="transition hover:text-white" href="#">Privacy</a>
+            <a class="transition hover:text-white" href="#">Terms</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js" defer></script>
   </body>
 </html>
