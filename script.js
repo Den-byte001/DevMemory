@@ -1,5 +1,22 @@
 const menuButton = document.getElementById("mobile-menu-button");
 const mobileMenu = document.getElementById("mobile-menu");
+const revealItems = document.querySelectorAll(".reveal-step, .reveal-card");
+
+if (revealItems.length) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.14 },
+  );
+
+  revealItems.forEach((item) => revealObserver.observe(item));
+}
 
 if (menuButton && mobileMenu) {
   menuButton.addEventListener("click", () => {
@@ -23,6 +40,32 @@ if (menuButton && mobileMenu) {
 }
 
 const terminalOutput = document.getElementById("terminal-output");
+const rotatingPhrases = document.getElementById("rotating-phrases");
+
+if (rotatingPhrases) {
+  const phrases = [
+    "Every bug teaches you something.",
+    "Every solution becomes part of your knowledge.",
+    "DevMemory helps you remember it.",
+  ];
+
+  let phraseIndex = 0;
+
+  const cyclePhrase = () => {
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    rotatingPhrases.animate(
+      [
+        { opacity: 0, transform: "translateY(12px)" },
+        { opacity: 1, transform: "translateY(0)" },
+      ],
+      { duration: 350, easing: "ease-out" },
+    );
+    rotatingPhrases.textContent = phrases[phraseIndex];
+    setTimeout(cyclePhrase, 2200);
+  };
+
+  setTimeout(cyclePhrase, 1800);
+}
 
 if (terminalOutput) {
   const lines = [

@@ -77,20 +77,15 @@
               <a class="transition hover:text-blue-600" href="#resources"
                 >Resources</a
               >
-              <a class="transition hover:text-blue-600" href="#about">About</a>
-              <a class="transition hover:text-blue-600" href="#developers"
-                >For Developers</a
+              <a class="transition hover:text-blue-600" href="#how-it-works"
+                >How It Works</a
               >
+              <a class="transition hover:text-blue-600" href="#about">About</a>
             </div>
 
             <div class="hidden items-center gap-3 lg:flex">
               <a
-                href="#"
-                class="hidden text-sm font-medium text-slate-700 transition hover:text-blue-600 sm:inline-flex"
-                >Sign In</a
-              >
-              <a
-                href="#"
+                href="login.html?mode=signup"
                 class="inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
               >
                 Sign Up
@@ -130,19 +125,19 @@
               >
               <a
                 class="rounded-xl px-3 py-2 text-sm font-medium text-white/90 transition hover:bg-white/8 hover:text-white"
+                href="#how-it-works"
+                >How It Works</a
+              >
+              <a
+                class="rounded-xl px-3 py-2 text-sm font-medium text-white/90 transition hover:bg-white/8 hover:text-white"
                 href="#about"
                 >About</a
               >
               <a
-                class="rounded-xl px-3 py-2 text-sm font-medium text-white/90 transition hover:bg-white/8 hover:text-white"
-                href="#developers"
-                >For Developers</a
-              >
-              <a
-                href="#"
+                href="login.html?mode=signup"
                 class="mt-2 inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500"
               >
-                Start Remembering
+                Sign Up
               </a>
             </div>
           </div>
@@ -155,16 +150,16 @@
             <div class="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
               <div>
                 <div
-                  class="blue-pill inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium"
+                  class="blue-pill inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em]"
                 >
                   <span class="h-2 w-2 rounded-full bg-blue-600"></span>
-                  Save what you learned while building
+                  Developer knowledge, remembered
                 </div>
 
                 <h1
                   class="mt-6 max-w-xl text-4xl font-black tracking-[-0.06em] text-slate-900 md:text-6xl"
                 >
-                  Remember how you solved it.
+                  The memory of development you never lose
                 </h1>
 
                 <p
@@ -177,7 +172,7 @@
 
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                   <a
-                    href="#"
+                    href="login.html?mode=signup"
                     class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-blue-700"
                   >
                     Start Remembering
@@ -186,7 +181,7 @@
                     href="#community"
                     class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3.5 text-base font-semibold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
                   >
-                    Explore Community
+                    Explore DevMemory
                   </a>
                 </div>
 
@@ -343,72 +338,91 @@
               <p
                 class="text-xs font-semibold uppercase tracking-[0.22em] text-blue-600"
               >
-                What developers save
+                Built for developers
               </p>
               <h2
                 class="mt-4 text-3xl font-bold tracking-[-0.05em] text-slate-900 md:text-4xl"
               >
-                Keep the knowledge you don’t want to lose.
+                Choose Your Way to Remember
               </h2>
+              <p class="mt-4 text-base leading-7 text-slate-600 md:text-lg">
+                Whether you are building your personal knowledge library or
+                learning from other developers, DevMemory helps you keep useful
+                knowledge close.
+              </p>
             </div>
 
-            <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div class="mt-12 grid gap-6 lg:grid-cols-2">
               <article
-                class="feature-card rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                class="feature-card rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm"
               >
                 <div class="small-icon mb-5">
-                  <i class="fa-solid fa-bug text-sm"></i>
+                  <i class="fa-solid fa-user-gear text-sm"></i>
                 </div>
-                <h3 class="text-xl font-semibold text-slate-900">
-                  Bug Solutions
+                <h3 class="text-2xl font-semibold text-slate-900">
+                  For Developers
                 </h3>
-                <p class="mt-3 text-sm leading-7 text-slate-600">
-                  Save the problems you solved and the fixes you used when the
-                  bug finally made sense.
+                <p class="mt-3 text-base leading-7 text-slate-600">
+                  Build your own personal library of solutions, snippets,
+                  commands, concepts, and lessons. Keep the things you learn
+                  organized and easy to find.
                 </p>
+                <ul class="mt-5 space-y-3 text-sm text-slate-700">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check mt-1 text-blue-600"></i>
+                    Save bugs and their solutions
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check mt-1 text-blue-600"></i>
+                    Organize your coding knowledge
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check mt-1 text-blue-600"></i>
+                    Find useful solutions whenever you need them
+                  </li>
+                </ul>
+                <a
+                  href="login.html?mode=signup"
+                  class="mt-7 inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
+                >
+                  Build Your Memory
+                </a>
               </article>
 
               <article
-                class="feature-card rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                class="feature-card rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm"
               >
                 <div class="small-icon mb-5">
-                  <i class="fa-solid fa-code text-sm"></i>
+                  <i class="fa-solid fa-people-group text-sm"></i>
                 </div>
-                <h3 class="text-xl font-semibold text-slate-900">
-                  Code Snippets
+                <h3 class="text-2xl font-semibold text-slate-900">
+                  For the Community
                 </h3>
-                <p class="mt-3 text-sm leading-7 text-slate-600">
-                  Keep the reusable patterns, helper functions, and snippets you
-                  reach for again and again.
+                <p class="mt-3 text-base leading-7 text-slate-600">
+                  Discover real solutions from other developers and share what
+                  you have learned. Turn your experience into knowledge that can
+                  help someone else.
                 </p>
-              </article>
-
-              <article
-                class="feature-card rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
-              >
-                <div class="small-icon mb-5">
-                  <i class="fa-solid fa-terminal text-sm"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-slate-900">Commands</h3>
-                <p class="mt-3 text-sm leading-7 text-slate-600">
-                  Save Git, npm, Docker, and terminal commands you forget until
-                  you need them most.
-                </p>
-              </article>
-
-              <article
-                class="feature-card rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
-              >
-                <div class="small-icon mb-5">
-                  <i class="fa-solid fa-book-open text-sm"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-slate-900">
-                  Developer Knowledge
-                </h3>
-                <p class="mt-3 text-sm leading-7 text-slate-600">
-                  Capture concepts, lessons, resources, and notes that help you
-                  learn and keep moving.
-                </p>
+                <ul class="mt-5 space-y-3 text-sm text-slate-700">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check mt-1 text-blue-600"></i>
+                    Search for real developer solutions
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check mt-1 text-blue-600"></i>
+                    Share useful knowledge with others
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check mt-1 text-blue-600"></i>
+                    Learn from problems developers have already solved
+                  </li>
+                </ul>
+                <a
+                  href="#community"
+                  class="mt-7 inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
+                >
+                  Explore the Community
+                </a>
               </article>
             </div>
           </div>
@@ -416,72 +430,308 @@
 
         <section id="resources" class="py-24">
           <div class="mx-auto max-w-6xl px-4 md:px-6">
-            <div class="mx-auto max-w-xl text-center">
+            <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+              <div>
+                <p
+                  class="text-xs font-semibold uppercase tracking-[0.22em] text-blue-600"
+                >
+                  Why DevMemory
+                </p>
+                <h2
+                  class="mt-4 text-3xl font-bold tracking-[-0.05em] text-slate-900 md:text-4xl"
+                >
+                  Every solution you discover is worth remembering.
+                </h2>
+                <p class="mt-5 max-w-xl text-lg leading-8 text-slate-600">
+                  Developers solve problems every day. We search for answers,
+                  fix bugs, learn new concepts, and discover useful code. But
+                  after solving the problem, we often forget how we did it.
+                </p>
+                <p class="mt-4 max-w-xl text-lg leading-8 text-slate-600">
+                  DevMemory gives you one simple place to save those solutions,
+                  snippets, commands, and lessons so you can find them whenever
+                  you need them again.
+                </p>
+
+                <div
+                  class="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                >
+                  <div
+                    class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600"
+                  >
+                    DevMemory remembers
+                  </div>
+                  <div
+                    id="rotating-phrases"
+                    class="mt-3 min-h-[2.5rem] text-2xl font-bold tracking-[-0.04em] text-slate-900"
+                  >
+                    Every bug teaches you something.
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-soft"
+              >
+                <div
+                  class="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-4"
+                >
+                  <div class="mb-4 flex items-center justify-between">
+                    <p
+                      class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400"
+                    >
+                      Knowledge library
+                    </p>
+                    <span
+                      class="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-semibold text-blue-700"
+                    >
+                      Active
+                    </span>
+                  </div>
+
+                  <div class="space-y-3">
+                    <div
+                      class="rounded-xl border border-slate-200 bg-white p-3"
+                    >
+                      <p
+                        class="text-[10px] uppercase tracking-[0.12em] text-slate-400"
+                      >
+                        Bug Fixes
+                      </p>
+                      <p class="mt-2 text-sm font-medium text-slate-700">
+                        Null check before map call
+                      </p>
+                    </div>
+                    <div
+                      class="rounded-xl border border-slate-200 bg-white p-3"
+                    >
+                      <p
+                        class="text-[10px] uppercase tracking-[0.12em] text-slate-400"
+                      >
+                        Code Snippets
+                      </p>
+                      <p class="mt-2 text-sm font-medium text-slate-700">
+                        useMemo + memoized fetch
+                      </p>
+                    </div>
+                    <div
+                      class="rounded-xl border border-slate-200 bg-white p-3"
+                    >
+                      <p
+                        class="text-[10px] uppercase tracking-[0.12em] text-slate-400"
+                      >
+                        Commands
+                      </p>
+                      <p class="mt-2 text-sm font-medium text-slate-700">
+                        git checkout -b feature/auth
+                      </p>
+                    </div>
+                    <div
+                      class="rounded-xl border border-slate-200 bg-white p-3"
+                    >
+                      <p
+                        class="text-[10px] uppercase tracking-[0.12em] text-slate-400"
+                      >
+                        Concepts
+                      </p>
+                      <p class="mt-2 text-sm font-medium text-slate-700">
+                        Memoization, caching, and request boundaries
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="how-it-works"
+          class="border-t border-slate-200 bg-white py-24"
+        >
+          <div class="mx-auto max-w-6xl px-4 md:px-6">
+            <div class="mx-auto max-w-3xl text-center">
               <p
                 class="text-xs font-semibold uppercase tracking-[0.22em] text-blue-600"
               >
-                How it works
+                How DevMemory works
               </p>
               <h2
-                class="mt-4 text-3xl font-bold tracking-[-0.05em] text-slate-900 md:text-4xl"
+                class="mt-4 text-3xl font-bold tracking-[-0.05em] text-slate-900 md:text-5xl"
               >
-                A simple routine for the knowledge you use most.
+                Your knowledge should work for you.
               </h2>
+              <p class="mt-5 text-lg leading-8 text-slate-600">
+                DevMemory helps you capture what you learn, save the problems
+                you solve, and quickly find useful knowledge whenever you need
+                it again.
+              </p>
             </div>
 
-            <div class="mt-12 grid gap-6 md:grid-cols-3">
+            <div
+              class="relative mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4"
+            >
+              <div
+                class="absolute inset-x-16 top-10 hidden h-px bg-slate-200 xl:block"
+              ></div>
+
               <article
-                class="step-card rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+                class="reveal-step step-card relative rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm"
               >
                 <div class="mb-5 flex items-center justify-between">
                   <span
-                    class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white"
-                    >1</span
+                    class="text-2xl font-bold tracking-[-0.04em] text-blue-600"
+                    >01</span
                   >
-                  <i class="fa-solid fa-lightbulb text-xl text-blue-600"></i>
+                  <div class="small-icon">
+                    <i class="fa-solid fa-code text-sm"></i>
+                  </div>
                 </div>
-                <h3 class="text-xl font-semibold text-slate-900">Solve</h3>
+                <h3 class="text-xl font-semibold text-slate-900">
+                  Solve a Problem
+                </h3>
                 <p class="mt-3 text-sm leading-7 text-slate-600">
-                  Solve a problem while building your project, debugging an
-                  issue, or learning something new.
+                  Work through a bug, learn a new concept, discover a useful
+                  command, or find a better way to write your code.
                 </p>
               </article>
 
               <article
-                class="step-card rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+                class="reveal-step step-card relative rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm"
               >
                 <div class="mb-5 flex items-center justify-between">
                   <span
-                    class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white"
-                    >2</span
+                    class="text-2xl font-bold tracking-[-0.04em] text-blue-600"
+                    >02</span
                   >
-                  <i class="fa-solid fa-floppy-disk text-xl text-blue-600"></i>
+                  <div class="small-icon">
+                    <i class="fa-solid fa-bookmark text-sm"></i>
+                  </div>
                 </div>
-                <h3 class="text-xl font-semibold text-slate-900">Save</h3>
+                <h3 class="text-xl font-semibold text-slate-900">
+                  Save Your Solution
+                </h3>
                 <p class="mt-3 text-sm leading-7 text-slate-600">
-                  Save the fix, snippet, command, or lesson in DevMemory with
-                  the context you need later.
+                  Save the solution, code snippet, command, explanation, or
+                  lesson in your personal DevMemory library.
                 </p>
               </article>
 
               <article
-                class="step-card rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+                class="reveal-step step-card relative rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm"
               >
                 <div class="mb-5 flex items-center justify-between">
                   <span
-                    class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white"
-                    >3</span
+                    class="text-2xl font-bold tracking-[-0.04em] text-blue-600"
+                    >03</span
                   >
-                  <i
-                    class="fa-solid fa-clock-rotate-left text-xl text-blue-600"
-                  ></i>
+                  <div class="small-icon">
+                    <i class="fa-solid fa-folder-tree text-sm"></i>
+                  </div>
                 </div>
-                <h3 class="text-xl font-semibold text-slate-900">Remember</h3>
+                <h3 class="text-xl font-semibold text-slate-900">
+                  Organize Your Knowledge
+                </h3>
                 <p class="mt-3 text-sm leading-7 text-slate-600">
-                  Find exactly what you need again when you’re deep in the next
-                  problem or sprint.
+                  Add categories and tags such as JavaScript, CSS, Git,
+                  Supabase, HTML, or project lessons so everything stays easy to
+                  find.
                 </p>
               </article>
+
+              <article
+                class="reveal-step step-card relative rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <div class="mb-5 flex items-center justify-between">
+                  <span
+                    class="text-2xl font-bold tracking-[-0.04em] text-blue-600"
+                    >04</span
+                  >
+                  <div class="small-icon">
+                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                  </div>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-900">
+                  Find It When You Need It
+                </h3>
+                <p class="mt-3 text-sm leading-7 text-slate-600">
+                  Search your saved memories whenever you face a similar problem
+                  and avoid starting from zero again.
+                </p>
+              </article>
+            </div>
+
+            <div class="mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+              <div
+                class="reveal-card rounded-[2rem] border border-slate-200 bg-slate-50 p-8 shadow-sm"
+              >
+                <p
+                  class="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600"
+                >
+                  Solve it once. Remember it forever.
+                </p>
+                <p
+                  class="mt-4 text-2xl font-bold tracking-[-0.04em] text-slate-900 md:text-3xl"
+                >
+                  Stop solving the same problem twice.
+                </p>
+                <a
+                  href="login.html?mode=signup"
+                  class="mt-6 inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
+                >
+                  Start Remembering
+                </a>
+              </div>
+
+              <div
+                class="reveal-card rounded-[2rem] border border-slate-200 bg-white p-5 shadow-soft"
+              >
+                <div
+                  class="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-4"
+                >
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <p
+                        class="text-[10px] uppercase tracking-[0.16em] text-slate-400"
+                      >
+                        Bug Fix
+                      </p>
+                      <h4 class="mt-2 text-lg font-semibold text-slate-900">
+                        Fixing a JavaScript Fetch Error
+                      </h4>
+                    </div>
+                    <span
+                      class="rounded-full bg-blue-50 px-2 py-1 text-[10px] font-semibold text-blue-700"
+                      >JavaScript</span
+                    >
+                  </div>
+
+                  <div class="mt-4 space-y-3">
+                    <div
+                      class="flex flex-wrap gap-2 text-[10px] text-slate-600"
+                    >
+                      <span
+                        class="rounded-full bg-white px-2 py-1 ring-1 ring-slate-200"
+                        >API</span
+                      >
+                      <span
+                        class="rounded-full bg-white px-2 py-1 ring-1 ring-slate-200"
+                        >Fetch</span
+                      >
+                    </div>
+                    <p class="text-sm leading-6 text-slate-600">
+                      The issue was caused by the API response not being
+                      converted to JSON before using the data.
+                    </p>
+                    <button
+                      type="button"
+                      class="mt-2 inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
+                    >
+                      View Memory
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -569,6 +819,90 @@
           </div>
         </section>
 
+        <section id="about" class="py-24">
+          <div class="mx-auto max-w-6xl px-4 md:px-6">
+            <div class="mx-auto max-w-3xl text-center">
+              <p
+                class="text-xs font-semibold uppercase tracking-[0.22em] text-blue-600"
+              >
+                About DevMemory
+              </p>
+              <h2
+                class="mt-4 text-3xl font-bold tracking-[-0.05em] text-slate-900 md:text-4xl"
+              >
+                Built to help developers remember.
+              </h2>
+              <p class="mt-5 text-lg leading-8 text-slate-600">
+                Developers solve problems every day. We search for answers, fix
+                bugs, learn new concepts, and discover useful code. But after
+                solving the problem, we often forget how we did it.
+              </p>
+              <p class="mt-4 text-lg leading-8 text-slate-600">
+                DevMemory gives developers one simple place to save those
+                solutions, snippets, commands, and lessons so they can find them
+                whenever they need them again.
+              </p>
+            </div>
+
+            <div class="mt-12 grid gap-6 md:grid-cols-3">
+              <article
+                class="rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <p
+                  class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600"
+                >
+                  The Problem
+                </p>
+                <p class="mt-4 text-base leading-7 text-slate-600">
+                  Developers constantly search for solutions, learn new
+                  concepts, and solve difficult bugs. However, useful knowledge
+                  is often scattered across browser history, notes, chats,
+                  bookmarks, and random files.
+                </p>
+              </article>
+
+              <article
+                class="rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <p
+                  class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600"
+                >
+                  The Solution
+                </p>
+                <p class="mt-4 text-base leading-7 text-slate-600">
+                  DevMemory helps developers capture and organize what they
+                  learn in one place. Save a solution once, then return to it
+                  whenever the same problem appears again.
+                </p>
+              </article>
+
+              <article
+                class="rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <p
+                  class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600"
+                >
+                  The Vision
+                </p>
+                <p class="mt-4 text-base leading-7 text-slate-600">
+                  We believe every developer should be able to build a personal
+                  library of knowledge and learn from the experiences of other
+                  developers.
+                </p>
+              </article>
+            </div>
+
+            <div class="mt-10 text-center">
+              <a
+                href="login.html?mode=signup"
+                class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-blue-700"
+              >
+                Start Remembering
+              </a>
+            </div>
+          </div>
+        </section>
+
         <section class="py-24">
           <div class="mx-auto max-w-5xl px-4 md:px-6">
             <div
@@ -587,14 +921,14 @@
               <p
                 class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600"
               >
-                Keep your development knowledge close and make every solution
-                part of your future.
+                Save what you learn today and make tomorrow’s development
+                easier.
               </p>
               <a
-                href="#"
+                href="login.html?mode=signup"
                 class="mt-8 inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-blue-700"
               >
-                Start Remembering
+                Create Your Memory
               </a>
             </div>
           </div>
@@ -615,6 +949,9 @@
                 class="h-8 w-auto"
               />
             </div>
+            <p class="mt-3 max-w-xs text-sm text-slate-400">
+              A simple knowledge and memory platform for developers.
+            </p>
           </div>
 
           <div class="flex flex-wrap items-center gap-5 text-sm text-slate-300">
@@ -625,10 +962,13 @@
             <a class="transition hover:text-white" href="#resources"
               >Resources</a
             >
+            <a class="transition hover:text-white" href="#how-it-works"
+              >How It Works</a
+            >
             <a class="transition hover:text-white" href="#about">About</a>
-            <a class="transition hover:text-white" href="#">GitHub</a>
-            <a class="transition hover:text-white" href="#">Privacy</a>
-            <a class="transition hover:text-white" href="#">Terms</a>
+            <a class="transition hover:text-white" href="login.html?mode=signup"
+              >Sign Up</a
+            >
           </div>
         </div>
       </footer>

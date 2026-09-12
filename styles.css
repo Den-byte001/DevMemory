@@ -143,3 +143,18 @@ body {
   border-color: rgba(37, 99, 235, 0.18);
   box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
 }
+
+.reveal-step,
+.reveal-card {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal-step.in-view,
+.reveal-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}

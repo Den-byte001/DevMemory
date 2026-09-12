@@ -20,57 +20,27 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            boxShadow: {
+              soft: "0 24px 60px rgba(15, 23, 42, 0.12)",
+            },
+          },
+        },
+      };
+    </script>
     <link rel="stylesheet" href="auth.css" />
   </head>
-  <body>
-    <div class="auth-shell" aria-live="polite">
-      <div class="auth-layout">
-        <aside class="brand-panel">
-          <div class="brand-content">
-            <div class="brand-top">
-              <div class="brand-logo">
-                <img src="img/DevMemoryLogo.png" alt="DevMemory logo" />
-                <span>DevMemory</span>
-              </div>
-              <div class="brand-badge">Secure</div>
-            </div>
-
-            <div class="brand-copy">
-              <h1>Remember your fixes.</h1>
-              <p>
-                Save the bugs you solved, the commands that worked, and the code
-                patterns you keep returning to.
-              </p>
-
-              <div class="feature-list">
-                <div class="feature-pill">
-                  <div class="icon"><i class="fa-solid fa-bug"></i></div>
-                  <span>Bug history</span>
-                </div>
-                <div class="feature-pill">
-                  <div class="icon"><i class="fa-solid fa-code"></i></div>
-                  <span>Snippets</span>
-                </div>
-                <div class="feature-pill">
-                  <div class="icon"><i class="fa-solid fa-terminal"></i></div>
-                  <span>Commands</span>
-                </div>
-                <div class="feature-pill">
-                  <div class="icon"><i class="fa-solid fa-book"></i></div>
-                  <span>Lessons</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="brand-footer">
-              <div class="avatar">D</div>
-              <span>Trusted by developers building faster.</span>
-            </div>
-          </div>
-        </aside>
-
-        <main class="auth-panel">
+  <body class="min-h-screen bg-slate-100/80 px-4 py-6 md:px-6 lg:py-10">
+    <div class="auth-shell mx-auto w-full max-w-6xl" aria-live="polite">
+      <div class="auth-layout grid grid-cols-1 lg:grid-cols-2">
+        <section class="auth-card signup-panel" data-panel="signup">
           <div class="auth-content">
+            <a href="index.html" class="back-link">← Back to home</a>
+
             <div
               class="switcher"
               role="tablist"
@@ -95,88 +65,43 @@
               </button>
             </div>
 
-            <section class="form-block visible" data-form="signup">
-              <div class="form-header">
-                <h2>Create your account</h2>
-                <p>
-                  Start saving every fix, snippet, and lesson that helps you
-                  ship.
-                </p>
-              </div>
+            <div class="form-header">
+              <h2>Create your account</h2>
+              <p>
+                Start saving every fix, snippet, and lesson that helps you ship.
+              </p>
+            </div>
 
-              <form class="auth-form">
-                <label class="field">
-                  <i class="fa-solid fa-user"></i>
-                  <input
-                    type="text"
-                    placeholder="Full name"
-                    aria-label="Full name"
-                  />
-                </label>
+            <form class="auth-form">
+              <label class="field">
+                <i class="fa-solid fa-user"></i>
+                <input
+                  type="text"
+                  placeholder="Full name"
+                  aria-label="Full name"
+                />
+              </label>
 
-                <label class="field">
-                  <i class="fa-solid fa-envelope"></i>
-                  <input
-                    type="email"
-                    placeholder="Email address"
-                    aria-label="Email address"
-                  />
-                </label>
+              <label class="field">
+                <i class="fa-solid fa-envelope"></i>
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  aria-label="Email address"
+                />
+              </label>
 
-                <label class="field">
-                  <i class="fa-solid fa-lock"></i>
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    aria-label="Password"
-                  />
-                </label>
+              <label class="field">
+                <i class="fa-solid fa-lock"></i>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  aria-label="Password"
+                />
+              </label>
 
-                <button type="submit" class="primary-btn">
-                  Create account
-                </button>
-              </form>
-            </section>
-
-            <section class="form-block hidden" data-form="login">
-              <div class="form-header">
-                <h2>Welcome back</h2>
-                <p>
-                  Pick up where you left off and revisit the knowledge you
-                  saved.
-                </p>
-              </div>
-
-              <form class="auth-form">
-                <label class="field">
-                  <i class="fa-solid fa-envelope"></i>
-                  <input
-                    type="email"
-                    placeholder="Email address"
-                    aria-label="Email address"
-                  />
-                </label>
-
-                <label class="field">
-                  <i class="fa-solid fa-lock"></i>
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    aria-label="Password"
-                  />
-                </label>
-
-                <div class="row">
-                  <label class="check">
-                    <input type="checkbox" />
-                    <span>Remember me</span>
-                  </label>
-                  <a href="#" class="link-text">Forgot password?</a>
-                </div>
-
-                <button type="submit" class="primary-btn">Log in</button>
-              </form>
-            </section>
+              <button type="submit" class="primary-btn">Create account</button>
+            </form>
 
             <div class="divider"><span>or continue with</span></div>
 
@@ -191,7 +116,139 @@
               </button>
             </div>
           </div>
-        </main>
+        </section>
+
+        <aside class="auth-card signup-promo" data-panel="signup">
+          <div class="promo-inner">
+            <div class="promo-brand">
+              <img src="img/DevMemoryLogo.png" alt="DevMemory logo" />
+            </div>
+            <span class="promo-tag">Start your memory</span>
+            <h1>Remember every fix that made you faster.</h1>
+            <p>
+              Save the bugs you solved, the code patterns you reused, and the
+              lessons you never want to forget.
+            </p>
+            <ul>
+              <li>
+                <i class="fa-solid fa-check"></i> Save snippets and commands
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Search by bug or stack trace
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Keep your solutions close
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <section class="auth-card login-panel" data-panel="login">
+          <div class="auth-content">
+            <a href="index.html" class="back-link">← Back to home</a>
+
+            <div
+              class="switcher"
+              role="tablist"
+              aria-label="Authentication switcher"
+            >
+              <div class="switch-indicator" aria-hidden="true"></div>
+              <button
+                class="switch-pill"
+                type="button"
+                data-auth-toggle="signup"
+                aria-pressed="false"
+              >
+                Sign Up
+              </button>
+              <button
+                class="switch-pill active"
+                type="button"
+                data-auth-toggle="login"
+                aria-pressed="true"
+              >
+                Log In
+              </button>
+            </div>
+
+            <div class="form-header">
+              <h2>Welcome back</h2>
+              <p>
+                Pick up where you left off and revisit the knowledge you saved.
+              </p>
+            </div>
+
+            <form class="auth-form">
+              <label class="field">
+                <i class="fa-solid fa-envelope"></i>
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  aria-label="Email address"
+                />
+              </label>
+
+              <label class="field">
+                <i class="fa-solid fa-lock"></i>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  aria-label="Password"
+                />
+              </label>
+
+              <div class="row">
+                <label class="check">
+                  <input type="checkbox" />
+                  <span>Remember me</span>
+                </label>
+                <a href="#" class="link-text">Forgot password?</a>
+              </div>
+
+              <button type="submit" class="primary-btn">Log in</button>
+            </form>
+
+            <div class="divider"><span>or continue with</span></div>
+
+            <div class="socials">
+              <button type="button" class="social-btn">
+                <i class="fa-brands fa-github"></i>
+                GitHub
+              </button>
+              <button type="button" class="social-btn">
+                <i class="fa-brands fa-google"></i>
+                Google
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="auth-card login-promo" data-panel="login">
+          <div class="promo-inner">
+            <div class="promo-brand">
+              <img src="img/DevMemoryLogo.png" alt="DevMemory logo" />
+            </div>
+            <span class="promo-tag">Welcome back</span>
+            <h1>Continue building with the knowledge you saved.</h1>
+            <p>
+              Jump straight back into your fixes, commands, and lessons without
+              losing time searching through old notes.
+            </p>
+            <ul>
+              <li>
+                <i class="fa-solid fa-check"></i> Revisit solved bugs instantly
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Keep commands and snippets
+                ready
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Learn from the work you
+                already shipped
+              </li>
+            </ul>
+          </div>
+        </aside>
       </div>
     </div>
 
