@@ -35,63 +35,69 @@ if (terminalOutput) {
     "fix guard the response before mapping — data?.items?.map(...)",
   ];
 
-  let lineIndex = 0;
+  const colorizeLine = (line) => {
+    const escaped = line
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
 
-  const typeLine = (line, lineElement) => {
-    let charIndex = 0;
-    let cursor = document.createElement("span");
-    cursor.className = "terminal-cursor";
-    lineElement.appendChild(cursor);
+    return escaped
+      .replace(
+        /(\$\s?devmemory\s?[a-zA-Z0-9_\-" ]+)/g,
+        '<span class="terminal-command">$1</span>',
+      )
+      .replace(
+        /\b(error|warning|saved|match|fix)\b/gi,
+        '<span class="terminal-keyword">$1</span>',
+      )
+      .replace(
+        /("[^"]*"|'[^']*'|`[^`]*`)/g,
+        '<span class="terminal-string">$1</span>',
+      )
+      .replace(
+        /(data\?\.items\?\.map\(\.\.\.\)|core\.autocrlf|git config --global)/g,
+        '<span class="terminal-function">$1</span>',
+      )
+      .replace(
+        /\b(\d+\s*(min|months|ago)|javascript|api)\b/gi,
+        '<span class="terminal-value">$1</span>',
+      );
+  };
 
-    const typeNext = () => {
-      if (charIndex <= line.length) {
-        lineElement.innerHTML = `${line.slice(0, charIndex)}<span class="terminal-cursor"></span>`;
-        charIndex += 1;
-        setTimeout(typeNext, 24);
+  const typeLine = (line, container, callback) => {
+    let index = 0;
+
+    const tick = () => {
+      if (index <= line.length) {
+        const visible = line.slice(0, index);
+        container.innerHTML = `${colorizeLine(visible)}<span class="terminal-cursor"></span>`;
+        index += 1;
+        setTimeout(tick, 18);
       } else {
-        lineElement.innerHTML = line;
-        setTimeout(() => {
-          if (lineIndex < lines.length - 1) {
-            lineIndex += 1;
-            typeLine(lines[lineIndex], document.createElement("div"));
-          }
-        }, 220);
+        container.innerHTML = colorizeLine(line);
+        if (callback) callback();
       }
     };
 
-    typeNext();
+    tick();
   };
 
-  const firstLine = document.createElement("div");
-  firstLine.className = "terminal-output-line";
-  terminalOutput.appendChild(firstLine);
-  typeLine(lines[0], firstLine);
+  let currentIndex = 0;
 
-  const typeNextLine = () => {
-    if (lineIndex < lines.length - 1) {
-      lineIndex += 1;
-      const nextLine = document.createElement("div");
-      nextLine.className = "terminal-output-line";
-      terminalOutput.appendChild(nextLine);
-      typeLine(lines[lineIndex], nextLine);
-    }
+  const addNextLine = () => {
+    if (currentIndex >= lines.length) return;
+
+    const lineEl = document.createElement("div");
+    lineEl.className = "terminal-output-line";
+    terminalOutput.appendChild(lineEl);
+
+    typeLine(lines[currentIndex], lineEl, () => {
+      currentIndex += 1;
+      if (currentIndex < lines.length) {
+        setTimeout(addNextLine, 220);
+      }
+    });
   };
 
-  const runner = () => {
-    if (lineIndex < lines.length - 1) {
-      setTimeout(typeNextLine, 320);
-    }
-  };
-
-  typeNextLine = null;
-  setTimeout(() => {
-    for (let i = 1; i < lines.length; i += 1) {
-      setTimeout(() => {
-        const line = document.createElement("div");
-        line.className = "terminal-output-line";
-        terminalOutput.appendChild(line);
-        typeLine(lines[i], line);
-      }, 320 * i);
-    }
-  }, 430);
+  addNextLine();
 }

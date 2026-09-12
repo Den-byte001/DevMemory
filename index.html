@@ -8,7 +8,7 @@
       name="description"
       content="DevMemory helps developers save and find the bugs, code snippets, commands, and lessons they learn while building."
     />
-    <link rel="icon" type="image/png" href="DevMemoryIcon.png" />
+    <link rel="icon" type="image/png" href="img/DevMemoryIcon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -48,122 +48,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <style>
-      :root {
-        --primary: hsl(214, 85%, 52%);
-        --primary-dark: hsl(213, 80%, 40%);
-        --primary-light: hsl(210, 90%, 96%);
-        --background: hsl(210, 20%, 99%);
-        --surface: hsl(210, 20%, 97%);
-        --text: hsl(215, 35%, 15%);
-        --text-secondary: hsl(215, 15%, 45%);
-        --text-muted: hsl(215, 10%, 60%);
-        --border: hsl(210, 20%, 90%);
-        --footer: hsl(215, 35%, 12%);
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
-        background: var(--background);
-        color: var(--text);
-      }
-
-      .app-shell {
-        background:
-          radial-gradient(
-            circle at top,
-            rgba(37, 99, 235, 0.07),
-            transparent 42%
-          ),
-          var(--background);
-      }
-
-      .soft-card {
-        border: 1px solid rgba(148, 163, 184, 0.2);
-        background: rgba(255, 255, 255, 0.78);
-        backdrop-filter: blur(10px);
-      }
-
-      .glass-menu {
-        background: rgba(15, 23, 42, 0.5);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 28px 80px rgba(15, 23, 42, 0.24);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-      }
-
-      .terminal-window {
-        background: rgba(18, 24, 35, 0.96);
-        border: 1px solid rgba(148, 163, 184, 0.18);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-      }
-
-      .terminal-prompt {
-        color: #f5d36c;
-      }
-
-      .terminal-output-line {
-        min-height: 1.3em;
-        white-space: pre-wrap;
-      }
-
-      .terminal-cursor {
-        display: inline-block;
-        width: 0.6em;
-        height: 1em;
-        margin-left: 2px;
-        vertical-align: -0.08em;
-        background: #f5d36c;
-        animation: blink 0.9s steps(1, end) infinite;
-      }
-
-      @keyframes blink {
-        50% {
-          opacity: 0;
-        }
-      }
-
-      .blue-pill {
-        background: rgba(37, 99, 235, 0.06);
-        border: 1px solid rgba(37, 99, 235, 0.12);
-        color: var(--primary-dark);
-      }
-
-      .small-icon {
-        width: 2.4rem;
-        height: 2.4rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 0.8rem;
-        background: rgba(37, 99, 235, 0.06);
-        border: 1px solid rgba(37, 99, 235, 0.08);
-        color: var(--primary);
-      }
-
-      .feature-card,
-      .step-card,
-      .community-card,
-      .preview-card {
-        transition:
-          transform 180ms ease,
-          border-color 180ms ease,
-          box-shadow 180ms ease;
-      }
-
-      .feature-card:hover,
-      .step-card:hover,
-      .community-card:hover,
-      .preview-card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(37, 99, 235, 0.18);
-        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="antialiased selection:bg-blue-100 selection:text-blue-900">
     <div class="app-shell">
@@ -173,7 +58,11 @@
             class="soft-card flex items-center justify-between rounded-full px-4 py-3 shadow-soft md:px-6"
           >
             <div class="flex items-center gap-3">
-              <img src="DevMemoryLogo.png" alt="DevMemory" class="h-8 w-auto" />
+              <img
+                src="img/DevMemoryLogo.png"
+                alt="DevMemory"
+                class="h-8 w-auto"
+              />
             </div>
 
             <div
@@ -333,46 +222,10 @@
                     >
                   </div>
 
-                  <div id="terminal-lines" class="space-y-2 font-mono">
-                    <div class="terminal-line">
-                      <span class="terminal-prompt">$</span> devmemory save
-                    </div>
-                    <div class="terminal-line">
-                      <span class="text-slate-300">error</span>
-                      <span class="text-rose-300"
-                        >Cannot read properties of undefined (reading
-                        'map')</span
-                      >
-                    </div>
-                    <div class="terminal-line">
-                      <span class="terminal-prompt">fix</span>
-                      <span class="text-amber-300"
-                        >guard the response before mapping —
-                        data?.items?.map(...)</span
-                      >
-                    </div>
-                    <div class="terminal-line">
-                      <span class="terminal-prompt">saved</span>
-                      <span class="text-emerald-300"
-                        >— tagged javascript, api</span
-                      >
-                    </div>
-                    <div class="terminal-line">
-                      <span class="terminal-prompt">$</span> devmemory find
-                      "cannot read properties of undefined"
-                    </div>
-                    <div class="terminal-line">
-                      <span class="text-slate-300">1 match</span>
-                      <span class="text-slate-400">— saved 3 months ago</span>
-                    </div>
-                    <div class="terminal-line">
-                      <span class="terminal-prompt">fix</span>
-                      <span class="text-amber-300"
-                        >guard the response before mapping —
-                        data?.items?.map(...)</span
-                      >
-                    </div>
-                  </div>
+                  <div
+                    id="terminal-output"
+                    class="space-y-1 font-mono text-[11px] leading-5"
+                  ></div>
                 </div>
 
                 <div
@@ -756,7 +609,11 @@
         >
           <div>
             <div class="flex items-center gap-3">
-              <img src="DevMemoryLogo.png" alt="DevMemory" class="h-8 w-auto" />
+              <img
+                src="img/DevMemoryLogo.png"
+                alt="DevMemory"
+                class="h-8 w-auto"
+              />
             </div>
           </div>
 

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevMemory — Sign in or Create account</title>
+    <meta
+      name="description"
+      content="Create an account or log in to DevMemory to save bugs, code snippets, commands, and lessons you want to remember."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="auth.css" />
+  </head>
+  <body>
+    <div class="auth-shell" aria-live="polite">
+      <div class="auth-layout">
+        <aside class="brand-panel">
+          <div class="brand-content">
+            <div class="brand-top">
+              <div class="brand-logo">
+                <img src="img/DevMemoryLogo.png" alt="DevMemory logo" />
+                <span>DevMemory</span>
+              </div>
+              <div class="brand-badge">Secure</div>
+            </div>
+
+            <div class="brand-copy">
+              <h1>Remember your fixes.</h1>
+              <p>
+                Save the bugs you solved, the commands that worked, and the code
+                patterns you keep returning to.
+              </p>
+
+              <div class="feature-list">
+                <div class="feature-pill">
+                  <div class="icon"><i class="fa-solid fa-bug"></i></div>
+                  <span>Bug history</span>
+                </div>
+                <div class="feature-pill">
+                  <div class="icon"><i class="fa-solid fa-code"></i></div>
+                  <span>Snippets</span>
+                </div>
+                <div class="feature-pill">
+                  <div class="icon"><i class="fa-solid fa-terminal"></i></div>
+                  <span>Commands</span>
+                </div>
+                <div class="feature-pill">
+                  <div class="icon"><i class="fa-solid fa-book"></i></div>
+                  <span>Lessons</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="brand-footer">
+              <div class="avatar">D</div>
+              <span>Trusted by developers building faster.</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="auth-panel">
+          <div class="auth-content">
+            <div
+              class="switcher"
+              role="tablist"
+              aria-label="Authentication switcher"
+            >
+              <div class="switch-indicator" aria-hidden="true"></div>
+              <button
+                class="switch-pill active"
+                type="button"
+                data-auth-toggle="signup"
+                aria-pressed="true"
+              >
+                Sign Up
+              </button>
+              <button
+                class="switch-pill"
+                type="button"
+                data-auth-toggle="login"
+                aria-pressed="false"
+              >
+                Log In
+              </button>
+            </div>
+
+            <section class="form-block visible" data-form="signup">
+              <div class="form-header">
+                <h2>Create your account</h2>
+                <p>
+                  Start saving every fix, snippet, and lesson that helps you
+                  ship.
+                </p>
+              </div>
+
+              <form class="auth-form">
+                <label class="field">
+                  <i class="fa-solid fa-user"></i>
+                  <input
+                    type="text"
+                    placeholder="Full name"
+                    aria-label="Full name"
+                  />
+                </label>
+
+                <label class="field">
+                  <i class="fa-solid fa-envelope"></i>
+                  <input
+                    type="email"
+                    placeholder="Email address"
+                    aria-label="Email address"
+                  />
+                </label>
+
+                <label class="field">
+                  <i class="fa-solid fa-lock"></i>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    aria-label="Password"
+                  />
+                </label>
+
+                <button type="submit" class="primary-btn">
+                  Create account
+                </button>
+              </form>
+            </section>
+
+            <section class="form-block hidden" data-form="login">
+              <div class="form-header">
+                <h2>Welcome back</h2>
+                <p>
+                  Pick up where you left off and revisit the knowledge you
+                  saved.
+                </p>
+              </div>
+
+              <form class="auth-form">
+                <label class="field">
+                  <i class="fa-solid fa-envelope"></i>
+                  <input
+                    type="email"
+                    placeholder="Email address"
+                    aria-label="Email address"
+                  />
+                </label>
+
+                <label class="field">
+                  <i class="fa-solid fa-lock"></i>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    aria-label="Password"
+                  />
+                </label>
+
+                <div class="row">
+                  <label class="check">
+                    <input type="checkbox" />
+                    <span>Remember me</span>
+                  </label>
+                  <a href="#" class="link-text">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="primary-btn">Log in</button>
+              </form>
+            </section>
+
+            <div class="divider"><span>or continue with</span></div>
+
+            <div class="socials">
+              <button type="button" class="social-btn">
+                <i class="fa-brands fa-github"></i>
+                GitHub
+              </button>
+              <button type="button" class="social-btn">
+                <i class="fa-brands fa-google"></i>
+                Google
+              </button>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="auth.js"></script>
+  </body>
+</html>
