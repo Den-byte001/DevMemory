@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevMemory Dashboard</title>
+    <meta
+      name="description"
+      content="DevMemory dashboard for saved bug fixes, snippets, commands, and notes."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-row">
+          <img src="img/DevMemoryLogo.png" alt="DevMemory" class="brand-logo" />
+        </div>
+
+        <nav class="nav" aria-label="Main navigation">
+          <button class="nav-item active" type="button">
+            <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+            Overview
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon"
+              ><i class="fa-solid fa-note-sticky"></i
+            ></span>
+            Notes
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon"><i class="fa-solid fa-code"></i></span>
+            Snippets
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon"><i class="fa-solid fa-tag"></i></span>
+            Tags
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
+            Saved
+          </button>
+        </nav>
+
+        <div class="sidebar-card">
+          <p class="muted-label">This week</p>
+          <h3>32</h3>
+          <p>solutions saved</p>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <div class="mobile-header-row">
+          <button
+            class="mobile-menu-button"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="mobile-page-heading">
+            <p class="eyebrow">Dashboard</p>
+            <h1>Knowledge board</h1>
+          </div>
+        </div>
+
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Dashboard</p>
+            <h1>Knowledge board</h1>
+          </div>
+
+          <div class="topbar-actions">
+            <label class="search-box" aria-label="Search notes">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="text"
+                value="Search notes"
+                aria-label="Search notes"
+              />
+            </label>
+            <button class="primary-btn" type="button">
+              <i class="fa-solid fa-plus"></i>
+              New note
+            </button>
+          </div>
+        </header>
+
+        <section class="stats-grid" aria-label="Summary statistics">
+          <article class="stat-card accent">
+            <div class="stat-icon"><i class="fa-solid fa-book"></i></div>
+            <div>
+              <p class="stat-label">Total notes</p>
+              <h2>128</h2>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-check"></i></div>
+            <div>
+              <p class="stat-label">Solved</p>
+              <h2>42</h2>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-share-nodes"></i></div>
+            <div>
+              <p class="stat-label">Shared</p>
+              <h2>16</h2>
+            </div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow small">Recent</p>
+                <h3>Saved memory</h3>
+              </div>
+              <button class="link-btn" type="button">View all</button>
+            </div>
+
+            <div class="note-list">
+              <article class="note-card">
+                <div class="note-header">
+                  <div class="note-icon bug">
+                    <i class="fa-solid fa-bug"></i>
+                  </div>
+                  <div class="note-text">
+                    <p class="kicker">Bug fix</p>
+                    <h4>CRLF mismatch in Windows builds</h4>
+                  </div>
+                  <span class="status-pill">Today</span>
+                </div>
+
+                <p class="note-copy">
+                  Set core.autocrlf to input and re-checkout files so line
+                  endings stay consistent across Windows and Linux.
+                </p>
+
+                <div class="tag-row">
+                  <span>git</span>
+                  <span>windows</span>
+                  <span>shell</span>
+                </div>
+              </article>
+
+              <article class="note-card">
+                <div class="note-header">
+                  <div class="note-icon code">
+                    <i class="fa-solid fa-code"></i>
+                  </div>
+                  <div class="note-text">
+                    <p class="kicker">Snippet</p>
+                    <h4>Auth guard pattern</h4>
+                  </div>
+                  <span class="status-pill muted">Saved</span>
+                </div>
+
+                <p class="note-copy">
+                  Reuse a single middleware guard to centralize route protection
+                  and keep access checks easy to debug.
+                </p>
+
+                <div class="tag-row">
+                  <span>node</span>
+                  <span>auth</span>
+                  <span>api</span>
+                </div>
+              </article>
+
+              <article class="note-card">
+                <div class="note-header">
+                  <div class="note-icon doc">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </div>
+                  <div class="note-text">
+                    <p class="kicker">Lesson</p>
+                    <h4>Memoization and request boundaries</h4>
+                  </div>
+                  <span class="status-pill muted">Pinned</span>
+                </div>
+
+                <p class="note-copy">
+                  Avoid memoizing too early. Keep the cache boundary around data
+                  fetches instead of derived UI state.
+                </p>
+
+                <div class="tag-row">
+                  <span>react</span>
+                  <span>performance</span>
+                  <span>state</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <aside class="panel side-panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow small">Quick view</p>
+                <h3>Tags</h3>
+              </div>
+            </div>
+
+            <div class="tag-cloud">
+              <span>git</span>
+              <span>react</span>
+              <span>api</span>
+              <span>node</span>
+              <span>auth</span>
+              <span>performance</span>
+              <span>css</span>
+              <span>deployment</span>
+            </div>
+
+            <div class="mini-card">
+              <p class="mini-label">Focus</p>
+              <h4>Fixing API response handling</h4>
+              <p>
+                Check status codes before parsing JSON and keep error fallback
+                logic consistent.
+              </p>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const appShell = document.querySelector(".app-shell");
+      const mobileMenuButton = document.querySelector(".mobile-menu-button");
+      const navItems = document.querySelectorAll(".nav-item");
+      const sidebar = document.querySelector(".sidebar");
+
+      function setMobileMenuState(isOpen) {
+        if (!appShell) return;
+
+        appShell.classList.toggle("nav-open", isOpen);
+
+        if (mobileMenuButton) {
+          mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+        }
+
+        document.body.classList.toggle(
+          "mobile-menu-open",
+          isOpen && window.innerWidth <= 980,
+        );
+      }
+
+      function closeMobileMenu() {
+        setMobileMenuState(false);
+      }
+
+      if (mobileMenuButton && appShell) {
+        mobileMenuButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const isOpen = !appShell.classList.contains("nav-open");
+          setMobileMenuState(isOpen);
+        });
+      }
+
+      navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          if (window.innerWidth <= 980) {
+            closeMobileMenu();
+          }
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (window.innerWidth > 980) return;
+
+        if (!appShell) return;
+
+        const clickedInsideSidebar = sidebar && sidebar.contains(event.target);
+        const clickedToggle =
+          mobileMenuButton && mobileMenuButton.contains(event.target);
+
+        if (
+          !clickedInsideSidebar &&
+          !clickedToggle &&
+          appShell.classList.contains("nav-open")
+        ) {
+          closeMobileMenu();
+        }
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 980) {
+          closeMobileMenu();
+        }
+      });
+    </script>
+  </body>
+</html>
