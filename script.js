@@ -1,6 +1,8 @@
 const menuButton = document.getElementById("mobile-menu-button");
 const mobileMenu = document.getElementById("mobile-menu");
-const revealItems = document.querySelectorAll(".reveal-step, .reveal-card");
+const revealItems = document.querySelectorAll(
+  ".reveal-step, .reveal-card, .reveal-section",
+);
 
 if (revealItems.length) {
   const revealObserver = new IntersectionObserver(
@@ -17,6 +19,12 @@ if (revealItems.length) {
 
   revealItems.forEach((item) => revealObserver.observe(item));
 }
+
+window.addEventListener("load", () => {
+  requestAnimationFrame(() => {
+    document.body.classList.add("page-ready");
+  });
+});
 
 if (menuButton && mobileMenu) {
   const closeMobileMenu = () => {

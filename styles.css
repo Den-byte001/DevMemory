@@ -19,6 +19,12 @@ body {
   font-family: "Inter", sans-serif;
   background: var(--background);
   color: var(--text);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+body.page-ready {
+  opacity: 1;
 }
 
 .app-shell {
@@ -27,10 +33,211 @@ body {
     var(--background);
 }
 
+.site-header {
+  opacity: 0;
+  transform: translateY(-14px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+body.page-ready .site-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .soft-card {
   border: 1px solid rgba(148, 163, 184, 0.2);
   background: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(10px);
+}
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+  transition: color 0.25s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.45rem;
+  width: 100%;
+  height: 1px;
+  background: rgba(37, 99, 235, 0.9);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.btn-primary,
+.btn-secondary,
+button,
+a {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+button:hover,
+a:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  box-shadow: 0 12px 22px rgba(37, 99, 235, 0.18);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.06);
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.6);
+  outline-offset: 2px;
+}
+
+.hero-copy > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+body.page-ready .hero-copy > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.page-ready .hero-copy .blue-pill {
+  transition-delay: 0.12s;
+}
+
+body.page-ready .hero-copy .hero-title {
+  transition-delay: 0.22s;
+}
+
+body.page-ready .hero-copy .hero-text {
+  transition-delay: 0.42s;
+}
+
+body.page-ready .hero-copy .hero-actions {
+  transition-delay: 0.62s;
+}
+
+body.page-ready .hero-copy .hero-meta {
+  transition-delay: 0.8s;
+}
+
+.hero-visual {
+  opacity: 0;
+  transform: translateY(18px) translateX(10px);
+  transition:
+    opacity 0.85s ease,
+    transform 0.85s ease;
+}
+
+body.page-ready .hero-visual {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+
+.reveal-section,
+.reveal-step,
+.reveal-card {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal-section.in-view,
+.reveal-step.in-view,
+.reveal-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-card:nth-child(2),
+.reveal-card:nth-child(3),
+.reveal-card:nth-child(4) {
+  transition-delay: 0.08s;
+}
+
+.feature-card,
+.step-card,
+.community-card,
+.preview-card {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    opacity 0.7s ease;
+}
+
+.feature-card:hover,
+.step-card:hover,
+.community-card:hover,
+.preview-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(37, 99, 235, 0.18);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
+}
+
+.small-icon {
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.feature-card:hover .small-icon,
+.step-card:hover .small-icon,
+.community-card:hover .small-icon,
+.preview-card:hover .small-icon {
+  transform: translateX(2px);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body,
+  .site-header,
+  .hero-copy > *,
+  .hero-visual,
+  .reveal-section,
+  .reveal-step,
+  .reveal-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .glass-menu {

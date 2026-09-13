@@ -260,8 +260,64 @@ input {
   gap: 16px;
 }
 
+.auth-card--single {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 28px 24px;
+}
+
+.recovery-shell {
+  max-width: 1180px;
+}
+
+.recovery-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: 760px;
+}
+
+.recovery-form-panel,
+.recovery-promo {
+  width: 100%;
+  flex: 1 1 0%;
+}
+
+.recovery-form-panel {
+  background: rgba(255, 255, 255, 0.75);
+  padding: 30px 30px 28px;
+}
+
+.recovery-promo {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 27, 52, 0.98),
+    rgba(15, 23, 42, 0.96)
+  );
+  color: white;
+  padding: 34px 38px;
+}
+
+.recovery-shell .auth-content {
+  width: min(100%, 520px);
+}
+
+.recovery-flow {
+  display: grid;
+  gap: 18px;
+}
+
 .field {
   position: relative;
+}
+
+.field.has-toggle {
+  position: relative;
+}
+
+.field.has-toggle input {
+  padding-right: 44px;
 }
 
 .field input {
@@ -291,6 +347,33 @@ input {
   font-size: 0.9rem;
 }
 
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background: transparent;
+  border-radius: 10px;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+  background: rgba(37, 99, 235, 0.06);
+  color: var(--primary-strong);
+  outline: none;
+}
+
 .row {
   display: flex;
   align-items: center;
@@ -316,9 +399,18 @@ input {
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
 }
 
-.primary-btn {
+.button-link {
+  font-family: inherit;
+}
+
+.primary-btn,
+.secondary-btn {
   border: 0;
   background: linear-gradient(135deg, var(--primary), var(--primary-strong));
   color: white;
@@ -330,12 +422,266 @@ input {
   cursor: pointer;
   transition:
     transform 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
 }
 
-.primary-btn:hover {
+.primary-btn:hover:not(:disabled),
+.secondary-btn:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 18px 32px rgba(37, 99, 235, 0.32);
+}
+
+.primary-btn:disabled,
+.secondary-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.primary-btn.is-loading,
+.secondary-btn.is-loading {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.primary-btn.is-loading .spinner,
+.secondary-btn.is-loading .spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.secondary-btn {
+  background: rgba(37, 99, 235, 0.06);
+  color: var(--primary-strong);
+  box-shadow: none;
+}
+
+.recovery-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.recovery-field {
+  flex: 1 1 auto;
+}
+
+.recovery-action {
+  flex: 0 0 auto;
+  min-width: 132px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (max-width: 767px) {
+  .recovery-layout {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .recovery-promo {
+    display: none !important;
+  }
+
+  .recovery-row {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .recovery-field {
+    flex: 1 1 auto;
+  }
+
+  .recovery-action,
+  .primary-btn {
+    width: auto;
+    min-width: 150px;
+    flex: 0 0 auto;
+    padding: 14px 18px;
+  }
+}
+
+.recovery-panel {
+  display: none;
+  padding-top: 8px;
+  display: grid;
+  gap: 18px;
+}
+
+.recovery-panel.is-visible {
+  display: grid;
+}
+
+.login-form-shell.is-recovery .login-form {
+  display: none;
+}
+
+.login-form-shell.is-recovery .recovery-panel {
+  display: grid;
+}
+
+.login-form-shell.is-recovery ~ .divider,
+.login-form-shell.is-recovery ~ .socials {
+  display: none;
+}
+
+.recovery-header {
+  margin-bottom: 0;
+}
+
+.recovery-kicker {
+  margin: 0 0 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary-strong);
+}
+
+.recovery-header h3 {
+  margin: 0;
+  font-size: clamp(1.7rem, 2vw, 2.2rem);
+  letter-spacing: -0.05em;
+}
+
+.recovery-step {
+  display: grid;
+  gap: 14px;
+}
+
+.recovery-step.hidden {
+  display: none;
+}
+
+.auth-form-shell {
+  width: 100%;
+}
+
+.auth-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.auth-modal.is-open {
+  display: flex;
+}
+
+.auth-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.48);
+  backdrop-filter: blur(4px);
+}
+
+.auth-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 440px);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 28px 24px 20px;
+  box-shadow: 0 28px 72px rgba(15, 23, 42, 0.2);
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(37, 99, 235, 0.06);
+  color: var(--primary-strong);
+  cursor: pointer;
+}
+
+.modal-content {
+  display: grid;
+  gap: 18px;
+}
+
+.modal-status-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--primary-strong);
+  font-size: 1.4rem;
+}
+
+.modal-status-icon.success {
+  background: rgba(34, 197, 94, 0.12);
+  color: #15803d;
+}
+
+.modal-message {
+  display: grid;
+  gap: 8px;
+}
+
+.modal-kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary-strong);
+  font-weight: 700;
+}
+
+.modal-message h3,
+.modal-success h3 {
+  margin: 0;
+  font-size: clamp(1.8rem, 2vw, 2.2rem);
+  letter-spacing: -0.05em;
+}
+
+.modal-message p,
+.modal-success p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.modal-form {
+  display: grid;
+  gap: 16px;
+}
+
+.modal-success {
+  display: grid;
+  gap: 16px;
+}
+
+.modal-success.hidden,
+.hidden {
+  display: none !important;
 }
 
 .divider {
@@ -397,6 +743,10 @@ input {
   display: flex;
 }
 
+html[data-auth-mode="signup"] .auth-shell .login-panel,
+html[data-auth-mode="signup"] .auth-shell .login-promo,
+html[data-auth-mode="login"] .auth-shell .signup-panel,
+html[data-auth-mode="login"] .auth-shell .signup-promo,
 .auth-shell:not(.is-login) .login-panel,
 .auth-shell:not(.is-login) .login-promo,
 .auth-shell.is-login .signup-panel,
@@ -404,19 +754,23 @@ input {
   display: none;
 }
 
+html[data-auth-mode="signup"] .auth-shell .signup-panel,
+html[data-auth-mode="login"] .auth-shell .login-panel,
 .auth-shell:not(.is-login) .signup-panel,
 .auth-shell.is-login .login-panel {
   grid-column: 1;
   order: 1;
 }
 
+html[data-auth-mode="signup"] .auth-shell .signup-promo,
+html[data-auth-mode="login"] .auth-shell .login-promo,
 .auth-shell:not(.is-login) .signup-promo,
 .auth-shell.is-login .login-promo {
   grid-column: 2;
   order: 2;
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) {
   .auth-layout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     min-height: auto;
@@ -481,6 +835,32 @@ input {
   }
 }
 
+@media (max-width: 767px) {
+  .recovery-layout {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .recovery-promo {
+    display: none !important;
+  }
+
+  .recovery-row {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .recovery-action,
+  .primary-btn {
+    width: auto;
+    min-width: 96px;
+    flex: 0 0 auto;
+    padding: 12px 12px;
+    font-size: 0.92rem;
+  }
+}
+
 @media (max-width: 640px) {
   body {
     padding: 12px 10px;
@@ -516,9 +896,27 @@ input {
     font-size: 0.95rem;
   }
 
+  .recovery-panel {
+    gap: 14px;
+  }
+
+  .recovery-row {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .recovery-action,
   .primary-btn {
-    width: 100%;
-    padding: 13px 16px;
+    width: auto;
+    min-width: 90px;
+    flex: 0 0 auto;
+    padding: 12px 10px;
+    font-size: 0.9rem;
+  }
+
+  .recovery-header h3 {
+    font-size: 1.5rem;
   }
 
   .socials {

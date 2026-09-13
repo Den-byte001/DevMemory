@@ -52,7 +52,7 @@
   </head>
   <body class="antialiased selection:bg-blue-100 selection:text-blue-900">
     <div class="app-shell">
-      <header class="fixed inset-x-0 top-4 z-50 px-4">
+      <header class="site-header fixed inset-x-0 top-4 z-50 px-4">
         <div class="mx-auto max-w-6xl">
           <nav
             class="soft-card flex items-center justify-between rounded-full px-4 py-3 shadow-soft md:px-6"
@@ -68,25 +68,35 @@
             <div
               class="hidden items-center gap-8 text-sm font-medium text-slate-600 lg:flex"
             >
-              <a class="transition hover:text-blue-600" href="#memories"
+              <a
+                class="nav-link transition hover:text-blue-600"
+                href="#memories"
                 >Memories</a
               >
-              <a class="transition hover:text-blue-600" href="#community"
+              <a
+                class="nav-link transition hover:text-blue-600"
+                href="#community"
                 >Community</a
               >
-              <a class="transition hover:text-blue-600" href="#resources"
+              <a
+                class="nav-link transition hover:text-blue-600"
+                href="#resources"
                 >Resources</a
               >
-              <a class="transition hover:text-blue-600" href="#how-it-works"
+              <a
+                class="nav-link transition hover:text-blue-600"
+                href="#how-it-works"
                 >How It Works</a
               >
-              <a class="transition hover:text-blue-600" href="#about">About</a>
+              <a class="nav-link transition hover:text-blue-600" href="#about"
+                >About</a
+              >
             </div>
 
             <div class="hidden items-center gap-3 lg:flex">
               <a
                 href="login.html?mode=signup"
-                class="inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
+                class="btn-primary inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
               >
                 Sign Up
               </a>
@@ -148,7 +158,7 @@
         <section class="pt-28 pb-20 md:pt-36 md:pb-28">
           <div class="mx-auto max-w-6xl px-4 md:px-6">
             <div class="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
-              <div>
+              <div class="hero-copy">
                 <div
                   class="blue-pill inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em]"
                 >
@@ -157,36 +167,36 @@
                 </div>
 
                 <h1
-                  class="mt-6 max-w-xl text-4xl font-black tracking-[-0.06em] text-slate-900 md:text-6xl"
+                  class="hero-title mt-6 max-w-xl text-4xl font-black tracking-[-0.06em] text-slate-900 md:text-6xl"
                 >
                   The memory of development you never lose
                 </h1>
 
                 <p
-                  class="mt-5 max-w-xl text-lg leading-8 text-slate-600 md:text-xl"
+                  class="hero-text mt-5 max-w-xl text-lg leading-8 text-slate-600 md:text-xl"
                 >
                   Save the bugs you solved, the code you learned, and the
                   knowledge you don’t want to forget. Find it again whenever you
                   need it.
                 </p>
 
-                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                <div class="hero-actions mt-8 flex flex-col gap-3 sm:flex-row">
                   <a
                     href="login.html?mode=signup"
-                    class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-blue-700"
+                    class="btn-primary inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-blue-700"
                   >
                     Start Remembering
                   </a>
                   <a
                     href="#community"
-                    class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3.5 text-base font-semibold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
+                    class="btn-secondary inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3.5 text-base font-semibold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
                   >
                     Explore DevMemory
                   </a>
                 </div>
 
                 <div
-                  class="mt-9 flex flex-wrap items-center gap-6 text-sm text-slate-500"
+                  class="hero-meta mt-9 flex flex-wrap items-center gap-6 text-sm text-slate-500"
                 >
                   <div class="flex items-center gap-2">
                     <i class="fa-solid fa-circle-check text-blue-600"></i>
@@ -200,7 +210,7 @@
               </div>
 
               <div
-                class="preview-card relative rounded-[2rem] border border-slate-200 bg-white p-4 shadow-soft md:p-5"
+                class="hero-visual preview-card relative rounded-[2rem] border border-slate-200 bg-white p-4 shadow-soft md:p-5"
               >
                 <div
                   class="terminal-window rounded-[1.5rem] p-3 text-left text-[11px] text-slate-200"
@@ -331,7 +341,7 @@
 
         <section
           id="memories"
-          class="border-t border-slate-200 bg-white/80 py-24"
+          class="reveal-section border-t border-slate-200 bg-white/80 py-24"
         >
           <div class="mx-auto max-w-6xl px-4 md:px-6">
             <div class="mx-auto max-w-2xl text-center">
@@ -428,7 +438,7 @@
           </div>
         </section>
 
-        <section id="resources" class="py-24">
+        <section id="resources" class="reveal-section py-24">
           <div class="mx-auto max-w-6xl px-4 md:px-6">
             <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
               <div>
@@ -547,7 +557,7 @@
 
         <section
           id="how-it-works"
-          class="border-t border-slate-200 bg-white py-24"
+          class="reveal-section border-t border-slate-200 bg-white py-24"
         >
           <div class="mx-auto max-w-6xl px-4 md:px-6">
             <div class="mx-auto max-w-3xl text-center">
@@ -738,7 +748,7 @@
 
         <section
           id="community"
-          class="border-y border-slate-200 bg-slate-50/80 py-24"
+          class="reveal-section border-y border-slate-200 bg-slate-50/80 py-24"
         >
           <div class="mx-auto max-w-6xl px-4 md:px-6">
             <div class="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
@@ -761,7 +771,7 @@
               </div>
 
               <div
-                class="community-card rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm"
+                class="community-card reveal-card rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm"
               >
                 <div
                   class="rounded-2xl border border-slate-200 bg-slate-50 p-4"
@@ -819,7 +829,7 @@
           </div>
         </section>
 
-        <section id="about" class="py-24">
+        <section id="about" class="reveal-section py-24">
           <div class="mx-auto max-w-6xl px-4 md:px-6">
             <div class="mx-auto max-w-3xl text-center">
               <p
