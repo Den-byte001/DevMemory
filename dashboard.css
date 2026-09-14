@@ -63,6 +63,25 @@ img {
   flex-direction: column;
 }
 
+.sidebar-head {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.sidebar-dismiss {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--muted);
+  cursor: pointer;
+}
+
 .brand-row {
   display: flex;
   align-items: center;
@@ -513,6 +532,10 @@ img {
     box-shadow: 0 24px 50px rgba(15, 23, 42, 0.12);
     padding: 18px 16px 16px;
     pointer-events: auto;
+  }
+
+  .sidebar-dismiss {
+    display: inline-flex;
   }
 
   .app-shell.nav-open .sidebar {

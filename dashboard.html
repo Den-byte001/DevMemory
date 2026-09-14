@@ -25,6 +25,17 @@
   <body>
     <div class="app-shell">
       <aside class="sidebar">
+        <div class="sidebar-head">
+          <button
+            class="sidebar-dismiss"
+            type="button"
+            aria-label="Dismiss navigation"
+            data-close-nav
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
         <div class="brand-row">
           <img src="img/DevMemoryLogo.png" alt="DevMemory" class="brand-logo" />
         </div>
@@ -250,6 +261,7 @@
       const mobileMenuButton = document.querySelector(".mobile-menu-button");
       const navItems = document.querySelectorAll(".nav-item");
       const sidebar = document.querySelector(".sidebar");
+      const sidebarDismissButton = document.querySelector("[data-close-nav]");
 
       function setMobileMenuState(isOpen) {
         if (!appShell) return;
@@ -275,6 +287,13 @@
           event.stopPropagation();
           const isOpen = !appShell.classList.contains("nav-open");
           setMobileMenuState(isOpen);
+        });
+      }
+
+      if (sidebarDismissButton) {
+        sidebarDismissButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+          closeMobileMenu();
         });
       }
 

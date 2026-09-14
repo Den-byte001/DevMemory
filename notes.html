@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevMemory — Notes</title>
+    <meta
+      name="description"
+      content="Notes page for DevMemory — a modern developer knowledge workspace for saving fixes, snippets, commands, and technical lessons."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#eff6ff",
+                100: "#dbeafe",
+                500: "#2563eb",
+                600: "#1d4ed8",
+                700: "#1e40af",
+              },
+            },
+            boxShadow: {
+              soft: "0 18px 40px rgba(15, 23, 42, 0.06)",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="notes.css" />
+  </head>
+  <body class="min-h-screen bg-[#f5f8ff] text-slate-900 antialiased">
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Sidebar navigation">
+        <div class="sidebar-head">
+          <button
+            class="sidebar-dismiss"
+            type="button"
+            aria-label="Dismiss navigation"
+            data-close-nav
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="brand-row">
+          <img src="img/DevMemoryLogo.png" alt="DevMemory" class="brand-logo" />
+        </div>
+
+        <nav class="nav" aria-label="Main navigation">
+          <button class="nav-item" type="button">
+            <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+            Overview
+          </button>
+          <button class="nav-item active" type="button">
+            <span class="nav-icon"
+              ><i class="fa-solid fa-note-sticky"></i
+            ></span>
+            Notes
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon"><i class="fa-solid fa-code"></i></span>
+            Snippets
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon"><i class="fa-solid fa-tag"></i></span>
+            Tags
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
+            Saved
+          </button>
+        </nav>
+      </aside>
+
+      <main class="main-panel">
+        <div class="mobile-header-row">
+          <button
+            class="mobile-menu-button"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="mobile-page-heading">
+            <p class="eyebrow">Your knowledge</p>
+            <h1>Notes</h1>
+          </div>
+        </div>
+
+        <header class="page-header">
+          <div class="header-copy">
+            <p class="eyebrow">Your knowledge</p>
+            <h1>Notes</h1>
+            <p class="header-subtitle">
+              Capture what you learn, remember what matters, and find it when
+              you need it.
+            </p>
+          </div>
+
+          <div class="header-actions">
+            <label class="search-box" aria-label="Search notes">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                id="note-search"
+                type="search"
+                placeholder="Search notes"
+                aria-label="Search notes"
+              />
+            </label>
+
+            <button id="open-new-note" class="primary-btn" type="button">
+              <i class="fa-solid fa-plus"></i>
+              <span>New note</span>
+              <span class="shortcut-hint">Ctrl + K</span>
+            </button>
+          </div>
+        </header>
+
+        <section class="notes-toolbar" aria-label="Notes toolbar">
+          <div class="filter-tabs" role="tablist" aria-label="Notes filters">
+            <button
+              class="filter-tab is-active"
+              type="button"
+              data-filter-tab="all"
+            >
+              All notes
+            </button>
+            <button class="filter-tab" type="button" data-filter-tab="recent">
+              Recent
+            </button>
+            <button
+              class="filter-tab"
+              type="button"
+              data-filter-tab="favorites"
+            >
+              Favorites
+            </button>
+            <button class="filter-tab" type="button" data-filter-tab="archived">
+              Archived
+            </button>
+          </div>
+
+          <div class="toolbar-actions">
+            <button id="filter-toggle" class="secondary-btn" type="button">
+              <i class="fa-solid fa-filter"></i>
+              Filter
+            </button>
+
+            <div class="sort-box">
+              <span class="sort-label">Sort</span>
+              <button id="sort-toggle" class="sort-button" type="button">
+                Newest first <i class="fa-solid fa-chevron-down"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <div
+          id="filter-popover"
+          class="filter-popover hidden"
+          aria-label="Filters"
+        >
+          <div class="popover-grid">
+            <div>
+              <p class="popover-label">Category</p>
+              <div class="check-list">
+                <label
+                  ><input type="checkbox" value="Bug Fix" checked /> Bug
+                  Fix</label
+                >
+                <label
+                  ><input type="checkbox" value="Learning" checked />
+                  Learning</label
+                >
+                <label
+                  ><input type="checkbox" value="Reference" checked />
+                  Reference</label
+                >
+                <label
+                  ><input type="checkbox" value="Concept" checked />
+                  Concept</label
+                >
+                <label
+                  ><input type="checkbox" value="Project" checked />
+                  Project</label
+                >
+              </div>
+            </div>
+
+            <div>
+              <p class="popover-label">Status</p>
+              <div class="check-list">
+                <label
+                  ><input type="checkbox" value="solved" checked />
+                  Solved</label
+                >
+                <label
+                  ><input type="checkbox" value="unsolved" checked />
+                  Unsolved</label
+                >
+                <label
+                  ><input type="checkbox" value="favorite" checked />
+                  Favorites</label
+                >
+              </div>
+            </div>
+
+            <div>
+              <p class="popover-label">Date</p>
+              <div class="check-list">
+                <label
+                  ><input type="checkbox" value="today" checked /> Today</label
+                >
+                <label
+                  ><input type="checkbox" value="week" checked /> This
+                  week</label
+                >
+                <label
+                  ><input type="checkbox" value="month" checked /> This
+                  month</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="popover-footer">
+            <button class="text-btn" type="button" data-reset-filters>
+              Reset
+            </button>
+            <button
+              class="primary-btn small-btn"
+              type="button"
+              data-apply-filters
+            >
+              Apply filters
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="active-filters"
+          class="active-filters"
+          aria-live="polite"
+        ></div>
+
+        <div class="summary-row" aria-label="Note summary">
+          <span><strong id="notes-count">0</strong> notes</span>
+          <span><strong id="solved-count">0</strong> solved</span>
+          <span><strong id="shared-count">0</strong> shared</span>
+          <span><strong id="favorite-count">0</strong> favorites</span>
+        </div>
+
+        <section
+          class="notes-grid"
+          id="notes-grid"
+          aria-live="polite"
+        ></section>
+
+        <div id="empty-state" class="empty-state hidden" aria-live="polite">
+          <div class="empty-icon">
+            <i class="fa-solid fa-book-open-reader"></i>
+          </div>
+          <h2>Your knowledge starts here.</h2>
+          <p>Save your first solution, discovery, or useful code pattern.</p>
+          <button class="primary-btn" type="button" data-create-first-note>
+            Create your first note
+          </button>
+        </div>
+
+        <div id="load-more-wrap" class="load-more-wrap">
+          <button class="secondary-btn" type="button" id="load-more-btn">
+            Load more
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <aside
+      id="note-preview"
+      class="note-drawer"
+      aria-hidden="true"
+      aria-label="Note preview drawer"
+    >
+      <div class="drawer-backdrop" data-close-drawer></div>
+      <div class="drawer-panel">
+        <div class="drawer-header">
+          <div>
+            <p id="preview-category" class="eyebrow small">Category</p>
+            <h2 id="preview-title">Title</h2>
+          </div>
+          <button
+            class="drawer-close"
+            type="button"
+            aria-label="Close note preview"
+            data-close-drawer
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="drawer-body">
+          <div class="drawer-summary">
+            <div class="meta-item">
+              <span class="meta-label">Created</span>
+              <strong id="preview-created">—</strong>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Updated</span>
+              <strong id="preview-updated">—</strong>
+            </div>
+          </div>
+
+          <div id="preview-tags" class="tag-row large"></div>
+
+          <div class="preview-block">
+            <p id="preview-description" class="preview-description"></p>
+            <div id="preview-content" class="preview-content"></div>
+          </div>
+        </div>
+
+        <div class="drawer-actions">
+          <button class="secondary-btn" type="button" id="preview-favorite-btn">
+            <i class="fa-solid fa-bookmark"></i>
+            Favorite
+          </button>
+          <button class="secondary-btn" type="button">
+            <i class="fa-solid fa-share-nodes"></i>
+            Share
+          </button>
+          <button class="danger-btn" type="button">
+            <i class="fa-solid fa-trash"></i>
+            Delete
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <div id="note-editor-modal" class="editor-modal hidden" aria-hidden="true">
+      <div class="editor-backdrop" data-close-editor></div>
+      <div
+        class="editor-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="editor-title"
+      >
+        <div class="editor-header">
+          <div>
+            <p class="eyebrow small">Create memory</p>
+            <h2 id="editor-title">New note</h2>
+          </div>
+          <button
+            class="drawer-close"
+            type="button"
+            aria-label="Close editor"
+            data-close-editor
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <form id="new-note-form" class="editor-form">
+          <div class="field-group">
+            <label for="note-title">Title</label>
+            <input
+              id="note-title"
+              type="text"
+              placeholder="Give your memory a clear title"
+              required
+            />
+          </div>
+
+          <div class="field-grid">
+            <div class="field-group">
+              <label for="note-category">Category</label>
+              <select id="note-category">
+                <option>Bug Fix</option>
+                <option>Learning</option>
+                <option>Reference</option>
+                <option>Concept</option>
+                <option>Project</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="note-tags">Tags</label>
+              <input
+                id="note-tags"
+                type="text"
+                placeholder="git, javascript, auth"
+              />
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="note-description">Short description</label>
+            <textarea
+              id="note-description"
+              rows="3"
+              placeholder="A brief explanation of the idea or fix."
+            ></textarea>
+          </div>
+
+          <div class="field-group">
+            <div class="editor-toolbar">
+              <button type="button" class="toolbar-action" data-format="bold">
+                <strong>B</strong>
+              </button>
+              <button type="button" class="toolbar-action" data-format="italic">
+                <em>I</em>
+              </button>
+              <button type="button" class="toolbar-action" data-format="list">
+                • List
+              </button>
+              <button type="button" class="toolbar-action" data-format="code">
+                &lt;/&gt; Code
+              </button>
+            </div>
+            <textarea
+              id="note-content"
+              rows="10"
+              placeholder="Write your note here... You can use markdown-style formatting, headings, lists, and code blocks."
+            ></textarea>
+          </div>
+
+          <div class="check-row">
+            <label><input type="checkbox" id="note-favorite" /> Favorite</label>
+            <label
+              ><input type="checkbox" id="note-solved" /> Mark as solved</label
+            >
+            <label
+              ><input type="checkbox" id="note-shared" /> Share with
+              community</label
+            >
+          </div>
+
+          <div class="editor-actions">
+            <button class="secondary-btn" type="button" data-close-editor>
+              Cancel
+            </button>
+            <button class="primary-btn" type="submit">Save note</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="toast-container"
+      class="toast-container"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+    <script src="notes.js"></script>
+  </body>
+</html>
