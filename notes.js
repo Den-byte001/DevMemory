@@ -104,6 +104,7 @@ const state = {
   selectedNoteId: null,
   filterOpen: false,
   displayedCount: 6,
+  sortDirection: "desc",
   filterOptions: {
     categories: ["Bug Fix", "Learning", "Reference", "Concept", "Project"],
     status: ["solved", "unsolved", "favorite"],
@@ -144,6 +145,15 @@ function formatRelative(value) {
   if (days === 0) return "Updated today";
   if (days === 1) return "Updated yesterday";
   return `Updated ${days}d ago`;
+}
+
+function compareNotes(a, b) {
+  const value = new Date(b.updatedAt) - new Date(a.updatedAt);
+  return state.sortDirection === "desc" ? value : -value;
+}
+
+function sortNotes(list) {
+  return [...list].sort(compareNotes);
 }
 
 function getVisibleNotes() {
@@ -211,6 +221,7 @@ function getVisibleNotes() {
     });
   }
 
+  filtered = sortNotes(filtered);
   filtered = filtered.slice(0, state.displayedCount);
   return filtered;
 }
@@ -344,9 +355,15 @@ function renderNotes() {
 }
 
 function renderAll() {
+  state.notes = sortNotes(state.notes);
   updateSummaryCounts();
   renderFilterPills();
   renderNotes();
+  if (sortToggle) {
+    const label =
+      state.sortDirection === "desc" ? "Newest first" : "Oldest first";
+    sortToggle.innerHTML = `${label} <i class="fa-solid fa-chevron-down"></i>`;
+  }
 }
 
 function toggleFavorite(id) {
@@ -508,11 +525,14 @@ filterToggle.addEventListener("click", () => {
 });
 
 sortToggle.addEventListener("click", () => {
-  state.notes = [...state.notes].sort(
-    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
-  );
+  state.sortDirection = state.sortDirection === "desc" ? "asc" : "desc";
+  state.notes = sortNotes(state.notes);
   renderAll();
-  showToast("Sorted by newest first");
+  showToast(
+    state.sortDirection === "desc"
+      ? "Sorted by newest first"
+      : "Sorted by oldest first",
+  );
 });
 
 document
@@ -542,6 +562,9 @@ document
   .getElementById("new-note-form")
   .addEventListener("submit", createNoteFromForm);
 document.getElementById("open-new-note").addEventListener("click", openEditor);
+document
+  .querySelector("[data-open-new-note-mobile]")
+  ?.addEventListener("click", openEditor);
 document
   .querySelector("[data-create-first-note]")
   .addEventListener("click", openEditor);
