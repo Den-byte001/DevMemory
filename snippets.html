@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevMemory — Snippets</title>
+    <meta
+      name="description"
+      content="DevMemory Snippets page for saving reusable code, commands, and solutions."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#eff6ff",
+                100: "#dbeafe",
+                500: "#2563eb",
+                600: "#1d4ed8",
+                700: "#1e40af",
+                900: "#0f172a",
+              },
+            },
+            boxShadow: {
+              soft: "0 18px 40px rgba(15, 23, 42, 0.06)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f5f8ff;
+      }
+
+      .code-block {
+        background: #0f172a;
+        color: #e2e8f0;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        border-radius: 0.9rem;
+      }
+
+      .code-block pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.78rem;
+        line-height: 1.6;
+      }
+
+      .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .snippet-card {
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+      }
+
+      .snippet-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 30px rgba(15, 23, 42, 0.08);
+      }
+
+      .drawer-open {
+        overflow: hidden;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-[#f5f8ff] text-slate-900 antialiased">
+    <div class="mx-auto max-w-[1600px] p-4 md:p-6">
+      <div
+        class="flex min-h-[calc(100vh-2rem)] overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-soft"
+      >
+        <aside
+          id="sidebar"
+          class="hidden w-[268px] shrink-0 flex-col border-r border-slate-200 bg-slate-50/80 p-5 lg:flex"
+        >
+          <div class="mb-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-100 text-sm font-bold text-brand-600"
+              >
+                D
+              </div>
+              <div>
+                <p
+                  class="text-[1.6rem] font-bold tracking-[-0.06em] text-slate-900"
+                >
+                  DevMemory
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <nav class="space-y-2" aria-label="Main navigation">
+            <a
+              class="nav-item flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+              href="dashboard.html"
+            >
+              <span
+                class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+                ><i class="fa-solid fa-chart-pie"></i
+              ></span>
+              Overview
+            </a>
+            <a
+              class="nav-item flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+              href="notes.html"
+            >
+              <span
+                class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+                ><i class="fa-solid fa-layer-group"></i
+              ></span>
+              Memories
+            </a>
+            <a
+              class="nav-item flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+              href="notes.html"
+            >
+              <span
+                class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+                ><i class="fa-solid fa-note-sticky"></i
+              ></span>
+              Notes
+            </a>
+            <a
+              class="nav-item active flex w-full items-center gap-3 rounded-xl border border-blue-100 bg-brand-50 px-3 py-2.5 text-left text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-50"
+              href="snippets.html"
+            >
+              <span
+                class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 text-xs text-brand-600"
+                ><i class="fa-solid fa-code"></i
+              ></span>
+              Snippets
+            </a>
+            <a
+              class="nav-item flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+              href="index.html"
+            >
+              <span
+                class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+                ><i class="fa-solid fa-book-open"></i
+              ></span>
+              Resources
+            </a>
+            <a
+              class="nav-item flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+              href="index.html#community"
+            >
+              <span
+                class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+                ><i class="fa-solid fa-users"></i
+              ></span>
+              Community
+            </a>
+            <a
+              class="nav-item flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+              href="snippets.html"
+            >
+              <span
+                class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+                ><i class="fa-solid fa-star"></i
+              ></span>
+              Favorites
+            </a>
+            <a
+              class="nav-item flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+              href="login.html"
+            >
+              <span
+                class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+                ><i class="fa-solid fa-gear"></i
+              ></span>
+              Settings
+            </a>
+          </nav>
+
+          <div
+            class="mt-auto rounded-2xl border border-slate-200 bg-white p-3 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-100 to-sky-100 text-sm font-semibold text-brand-600"
+              >
+                AK
+              </div>
+              <div class="min-w-0">
+                <p class="truncate text-sm font-semibold text-slate-900">
+                  Alicia Kim
+                </p>
+                <p class="text-xs text-slate-500">Frontend engineer</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="flex flex-1 flex-col">
+          <header
+            class="flex items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-4 md:px-6 lg:px-8"
+          >
+            <div class="flex items-center gap-3 sm:gap-4">
+              <button
+                id="mobileMenuButton"
+                class="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm lg:hidden"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+              >
+                <i class="fa-solid fa-bars"></i>
+              </button>
+              <div>
+                <p
+                  class="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-600"
+                >
+                  Developer workspace
+                </p>
+                <h1
+                  class="mt-1 text-xl font-bold tracking-[-0.05em] text-slate-900 md:text-2xl"
+                >
+                  My Snippets
+                </h1>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+              <button
+                class="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:border-blue-200 hover:text-brand-600"
+                type="button"
+                aria-label="Search snippets"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+              <button
+                class="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:border-blue-200 hover:text-brand-600"
+                type="button"
+                aria-label="Notifications"
+              >
+                <i class="fa-solid fa-bell"></i>
+                <span
+                  class="absolute right-2 top-2 h-2 w-2 rounded-full bg-brand-500"
+                ></span>
+              </button>
+              <button
+                class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-sm font-semibold text-brand-600 ring-2 ring-white"
+                type="button"
+                aria-label="User profile"
+              >
+                AK
+              </button>
+              <button
+                id="newSnippetButton"
+                class="inline-flex items-center gap-2 rounded-xl bg-brand-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600 focus:outline-none focus:ring-4 focus:ring-blue-100"
+                type="button"
+              >
+                <i class="fa-solid fa-plus"></i>
+                <span class="hidden sm:inline">New Snippet</span>
+              </button>
+            </div>
+          </header>
+
+          <main class="flex-1 bg-[#f8fbff] p-4 md:p-6 lg:p-8">
+            <section
+              class="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6"
+            >
+              <div
+                class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"
+              >
+                <div class="max-w-2xl">
+                  <p
+                    class="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-brand-600"
+                  >
+                    Your code library
+                  </p>
+                  <h2
+                    class="mt-3 text-3xl font-bold tracking-[-0.06em] text-slate-900 md:text-4xl"
+                  >
+                    My Snippets
+                  </h2>
+                  <p
+                    class="mt-3 max-w-xl text-sm leading-6 text-slate-600 md:text-base"
+                  >
+                    Keep your most useful code close. Save reusable solutions,
+                    commands, functions, and patterns so you do not have to
+                    write them again.
+                  </p>
+                </div>
+
+                <div class="grid gap-3 sm:grid-cols-3 lg:min-w-[420px]">
+                  <div
+                    class="rounded-xl border border-slate-200 bg-slate-50 p-3.5"
+                  >
+                    <p
+                      class="text-[0.62rem] font-bold uppercase tracking-[0.15em] text-slate-500"
+                    >
+                      Total Snippets
+                    </p>
+                    <p
+                      class="mt-2 text-2xl font-bold tracking-[-0.05em] text-slate-900"
+                    >
+                      24
+                    </p>
+                  </div>
+                  <div
+                    class="rounded-xl border border-slate-200 bg-slate-50 p-3.5"
+                  >
+                    <p
+                      class="text-[0.62rem] font-bold uppercase tracking-[0.15em] text-slate-500"
+                    >
+                      Favorite
+                    </p>
+                    <p
+                      class="mt-2 text-2xl font-bold tracking-[-0.05em] text-slate-900"
+                    >
+                      8
+                    </p>
+                  </div>
+                  <div
+                    class="rounded-xl border border-slate-200 bg-slate-50 p-3.5"
+                  >
+                    <p
+                      class="text-[0.62rem] font-bold uppercase tracking-[0.15em] text-slate-500"
+                    >
+                      Recently Added
+                    </p>
+                    <p
+                      class="mt-2 text-2xl font-bold tracking-[-0.05em] text-slate-900"
+                    >
+                      5
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section
+              class="mb-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:p-5"
+            >
+              <div class="flex flex-col gap-3 xl:flex-row xl:items-center">
+                <label
+                  class="flex w-full items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-slate-500 transition focus-within:border-blue-200 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-50 xl:flex-1"
+                >
+                  <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                  <input
+                    id="searchInput"
+                    type="search"
+                    placeholder="Search snippets, languages, or tags..."
+                    class="w-full border-0 bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400"
+                  />
+                </label>
+
+                <div class="grid gap-3 md:grid-cols-3 xl:w-[760px]">
+                  <label
+                    class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-600"
+                  >
+                    <span class="shrink-0">Language</span>
+                    <select
+                      id="languageFilter"
+                      class="w-full appearance-none border-0 bg-transparent text-sm font-medium text-slate-700 outline-none"
+                    >
+                      <option value="All">All Languages</option>
+                      <option>JavaScript</option>
+                      <option>HTML</option>
+                      <option>CSS</option>
+                      <option>Tailwind CSS</option>
+                      <option>Python</option>
+                      <option>SQL</option>
+                      <option>Git</option>
+                    </select>
+                  </label>
+
+                  <label
+                    class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-600"
+                  >
+                    <span class="shrink-0">Category</span>
+                    <select
+                      id="categoryFilter"
+                      class="w-full appearance-none border-0 bg-transparent text-sm font-medium text-slate-700 outline-none"
+                    >
+                      <option value="All">All Categories</option>
+                      <option>Functions</option>
+                      <option>API</option>
+                      <option>Components</option>
+                      <option>Utilities</option>
+                      <option>Commands</option>
+                      <option>Forms</option>
+                    </select>
+                  </label>
+
+                  <div
+                    class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-600"
+                  >
+                    <span class="shrink-0">Sort</span>
+                    <select
+                      id="sortSelect"
+                      class="w-full appearance-none border-0 bg-transparent text-sm font-medium text-slate-700 outline-none"
+                    >
+                      <option value="recent">Recently Added</option>
+                      <option value="oldest">Oldest</option>
+                      <option value="popular">Most Used</option>
+                      <option value="az">A–Z</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div
+                  class="flex items-center rounded-xl border border-slate-200 bg-slate-50 p-1"
+                >
+                  <button
+                    id="gridViewButton"
+                    type="button"
+                    class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-semibold text-slate-900 shadow-sm"
+                    aria-label="Grid view"
+                  >
+                    <i class="fa-solid fa-table-cells"></i>
+                    <span class="hidden sm:inline">Grid</span>
+                  </button>
+                  <button
+                    id="listViewButton"
+                    type="button"
+                    class="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-slate-600"
+                    aria-label="List view"
+                  >
+                    <i class="fa-solid fa-list"></i>
+                    <span class="hidden sm:inline">List</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section
+              id="snippetContainer"
+              class="grid gap-5 xl:grid-cols-3 md:grid-cols-2"
+            ></section>
+            <div
+              id="emptyState"
+              class="hidden rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center shadow-sm"
+            >
+              <div
+                class="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-slate-100 text-slate-600"
+              >
+                <i class="fa-solid fa-folder-open text-xl"></i>
+              </div>
+              <h3
+                class="mt-5 text-2xl font-bold tracking-[-0.04em] text-slate-900"
+              >
+                Your code library is waiting.
+              </h3>
+              <p class="mt-2 text-sm text-slate-600">
+                Save your first snippet and make your future coding sessions
+                easier.
+              </p>
+              <button
+                id="emptyStateButton"
+                class="mt-5 inline-flex items-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600"
+                type="button"
+              >
+                <i class="fa-solid fa-plus"></i>
+                Create Your First Snippet
+              </button>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="mobileDrawer"
+      class="fixed inset-0 z-40 hidden bg-slate-900/40 lg:hidden"
+    >
+      <div
+        class="h-full w-[82%] max-w-[280px] border-r border-slate-200 bg-slate-50 p-5 shadow-xl"
+      >
+        <div class="mb-6 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-100 text-sm font-bold text-brand-600"
+            >
+              D
+            </div>
+            <p class="text-xl font-bold tracking-[-0.06em] text-slate-900">
+              DevMemory
+            </p>
+          </div>
+          <button
+            id="closeDrawerButton"
+            class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600"
+            type="button"
+            aria-label="Close navigation"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <nav class="space-y-2" aria-label="Mobile navigation">
+          <button
+            class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100"
+            type="button"
+          >
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+              ><i class="fa-solid fa-chart-pie"></i
+            ></span>
+            Overview
+          </button>
+          <button
+            class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100"
+            type="button"
+          >
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+              ><i class="fa-solid fa-layer-group"></i
+            ></span>
+            Memories
+          </button>
+          <button
+            class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100"
+            type="button"
+          >
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+              ><i class="fa-solid fa-note-sticky"></i
+            ></span>
+            Notes
+          </button>
+          <button
+            class="flex w-full items-center gap-3 rounded-xl border border-blue-100 bg-brand-50 px-3 py-2.5 text-left text-sm font-semibold text-brand-700 shadow-sm"
+            type="button"
+          >
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 text-xs text-brand-600"
+              ><i class="fa-solid fa-code"></i
+            ></span>
+            Snippets
+          </button>
+          <button
+            class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100"
+            type="button"
+          >
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+              ><i class="fa-solid fa-book-open"></i
+            ></span>
+            Resources
+          </button>
+          <button
+            class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100"
+            type="button"
+          >
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+              ><i class="fa-solid fa-users"></i
+            ></span>
+            Community
+          </button>
+          <button
+            class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100"
+            type="button"
+          >
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+              ><i class="fa-solid fa-star"></i
+            ></span>
+            Favorites
+          </button>
+          <button
+            class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100"
+            type="button"
+          >
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500"
+              ><i class="fa-solid fa-gear"></i
+            ></span>
+            Settings
+          </button>
+        </nav>
+      </div>
+    </div>
+
+    <div
+      id="snippetModal"
+      class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-900/45 p-4"
+    >
+      <div
+        class="mx-auto mt-4 w-full max-w-2xl rounded-2xl border border-slate-200 bg-white shadow-soft md:mt-10"
+      >
+        <div
+          class="flex items-center justify-between border-b border-slate-200 px-5 py-4"
+        >
+          <div>
+            <p
+              class="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-600"
+            >
+              Create snippet
+            </p>
+            <h3
+              class="mt-1 text-xl font-bold tracking-[-0.05em] text-slate-900"
+            >
+              New Snippet
+            </h3>
+          </div>
+          <button
+            class="close-modal-btn flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600"
+            type="button"
+            aria-label="Close modal"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <form
+          id="snippetForm"
+          class="max-h-[70vh] space-y-4 overflow-y-auto p-5 md:p-6"
+          novalidate
+        >
+          <div class="grid gap-4 md:grid-cols-2">
+            <label class="block md:col-span-2">
+              <span class="mb-1.5 block text-sm font-medium text-slate-700"
+                >Snippet Title</span
+              >
+              <input
+                id="snippetTitle"
+                name="title"
+                type="text"
+                placeholder="Enter snippet title"
+                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-700 outline-none transition focus:border-blue-300 focus:bg-white focus:ring-4 focus:ring-blue-50"
+              />
+            </label>
+
+            <label class="block md:col-span-2">
+              <span class="mb-1.5 block text-sm font-medium text-slate-700"
+                >Description</span
+              >
+              <input
+                id="snippetDescription"
+                name="description"
+                type="text"
+                placeholder="What does this snippet do?"
+                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-700 outline-none transition focus:border-blue-300 focus:bg-white focus:ring-4 focus:ring-blue-50"
+              />
+            </label>
+
+            <label class="block">
+              <span class="mb-1.5 block text-sm font-medium text-slate-700"
+                >Programming Language</span
+              >
+              <select
+                id="snippetLanguage"
+                name="language"
+                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-700 outline-none transition focus:border-blue-300 focus:bg-white focus:ring-4 focus:ring-blue-50"
+              >
+                <option value="">Select language</option>
+                <option>JavaScript</option>
+                <option>HTML</option>
+                <option>CSS</option>
+                <option>Tailwind CSS</option>
+                <option>Python</option>
+                <option>SQL</option>
+                <option>Git</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label class="block">
+              <span class="mb-1.5 block text-sm font-medium text-slate-700"
+                >Category</span
+              >
+              <select
+                id="snippetCategory"
+                name="category"
+                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-700 outline-none transition focus:border-blue-300 focus:bg-white focus:ring-4 focus:ring-blue-50"
+              >
+                <option value="">Select category</option>
+                <option>Functions</option>
+                <option>API</option>
+                <option>Components</option>
+                <option>Utilities</option>
+                <option>Commands</option>
+                <option>Forms</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="block">
+            <span class="mb-1.5 block text-sm font-medium text-slate-700"
+              >Code</span
+            >
+            <textarea
+              id="snippetCode"
+              name="code"
+              rows="10"
+              placeholder="Paste or write your code here..."
+              class="w-full rounded-xl border border-slate-200 bg-[#0f172a] px-3.5 py-3 font-mono text-sm text-slate-200 outline-none transition focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+              aria-label="Code editor"
+            ></textarea>
+          </label>
+
+          <div class="grid gap-4 md:grid-cols-2">
+            <label class="block">
+              <span class="mb-1.5 block text-sm font-medium text-slate-700"
+                >Tags</span
+              >
+              <input
+                id="snippetTags"
+                name="tags"
+                type="text"
+                placeholder="Add tags..."
+                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-700 outline-none transition focus:border-blue-300 focus:bg-white focus:ring-4 focus:ring-blue-50"
+              />
+            </label>
+
+            <label class="block">
+              <span class="mb-1.5 block text-sm font-medium text-slate-700"
+                >Notes or Explanation</span
+              >
+              <input
+                id="snippetNotes"
+                name="notes"
+                type="text"
+                placeholder="Add a short explanation about how and when to use this snippet..."
+                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-700 outline-none transition focus:border-blue-300 focus:bg-white focus:ring-4 focus:ring-blue-50"
+              />
+            </label>
+          </div>
+
+          <div
+            id="formErrors"
+            class="hidden rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700"
+          ></div>
+
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button
+              class="close-modal-btn inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              id="saveSnippetButton"
+              class="inline-flex items-center justify-center rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600"
+              type="submit"
+            >
+              Save Snippet
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="detailModal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/45 p-4"
+    >
+      <div
+        class="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-slate-200 bg-white shadow-soft"
+      >
+        <div
+          class="flex items-center justify-between border-b border-slate-200 px-5 py-4"
+        >
+          <div>
+            <p
+              class="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-600"
+            >
+              Snippet details
+            </p>
+            <h3
+              id="detailTitle"
+              class="mt-1 text-2xl font-bold tracking-[-0.05em] text-slate-900"
+            >
+              Snippet
+            </h3>
+          </div>
+          <button
+            class="close-detail-btn flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600"
+            type="button"
+            aria-label="Close detail view"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div id="detailContent" class="space-y-5 p-5 md:p-6"></div>
+      </div>
+    </div>
+
+    <div
+      id="toast"
+      class="pointer-events-none fixed bottom-6 right-6 z-[60] hidden rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700 shadow-lg"
+    ></div>
+
+    <script src="snippets.js"></script>
+  </body>
+</html>
